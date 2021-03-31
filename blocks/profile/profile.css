@@ -1,0 +1,80 @@
+.profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0 0;
+  box-sizing: border-box;
+  max-width: 880px;
+}
+
+.profile__info-box {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.profile__avatar {
+  border-radius: 50%;
+  margin-right: 28px;
+  width: 120px;
+  height: 120px;
+}
+
+.profile__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.profile__text-top {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.profile__name {
+  font-size: 42px;
+  line-height: 48px;
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.profile__title {
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 400;
+  margin: 0;
+}
+
+.profile__edit-button {
+  display: flex;
+  justify-content: center;
+  /* position: absolute;
+  top: 0;
+  right: 0; */
+  box-sizing: border-box;
+  border: 1px solid #FFFFFF;
+  height: 24px;
+  width: 24px;
+  padding: 7px;
+  margin-left: 18px;
+}
+
+.profile__edit-button-icon {
+
+}
+
+.profile__add-button {
+  height: 50px;
+  width: 150px;
+  border: 2px solid #FFFFFF;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__add-button-icon {
+
+}
