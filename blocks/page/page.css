@@ -1,0 +1,17 @@
+.page {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%; */
+  background: #000000;
+  color: #FFFFFF;
+
+  /* Page designed for viewports 1280px and smaller */
+  max-width: 1280px;
+  margin: 0 auto 0;
+
+  /* Purely for testing page before and development */
+  min-height: 100vh;
+}
