@@ -1,3 +1,12 @@
+@import url(./__add-button/profile__add-button.css);
+@import url(./__avatar/profile__avatar.css);
+@import url(./__edit-button/profile__edit-button.css);
+@import url(./__info-box/profile__info-box.css);
+@import url(./__name/profile__name.css);
+@import url(./__text-top/profile__text-top.css);
+@import url(./__text/profile__text.css);
+@import url(./__title/profile__title.css);
+
 .profile {
   display: flex;
   justify-content: space-between;
@@ -6,81 +15,3 @@
   box-sizing: border-box;
   max-width: 880px;
 }
-
-.profile__info-box {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.profile__avatar {
-  border-radius: 50%;
-  margin-right: 28px;
-  width: 120px;
-  height: 120px;
-}
-
-.profile__text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-}
-
-.profile__text-top {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.profile__name {
-  font-size: 42px;
-  line-height: 48px;
-  font-weight: 400;
-  margin: 0;
-  margin-bottom: 8px;
-}
-
-.profile__title {
-  font-size: 18px;
-  line-height: 1.2;
-  font-weight: 400;
-  margin: 0;
-}
-
-.profile__edit-button {
-  display: flex;
-  justify-content: center;
-  /* position: absolute;
-  top: 0;
-  right: 0; */
-  box-sizing: border-box;
-  border: 1px solid #FFFFFF;
-  height: 24px;
-  width: 24px;
-  padding: 7px;
-  margin-left: 18px;
-  border-radius: 2px;
-  transition: all .2s ease;
-  cursor: pointer;
-}
-
-.profile__edit-button:hover {
-  opacity: .6;
-}
-
-.profile__add-button {
-  height: 50px;
-  width: 150px;
-  border: 2px solid #FFFFFF;
-  border-radius: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: all .2s ease;
-}
-
-.profile__add-button:hover {
-  opacity: .6;
-}
-

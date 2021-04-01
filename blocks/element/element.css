@@ -1,40 +1,11 @@
+@import url(./__heart/element__heart.css);
+@import url(./__image/element__image.css);
+@import url(./__name-box/element__name-box.css);
+@import url(./__name/element__name.css);
+
 .element {
   background-color: #FFFFFF;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   overflow: hidden;
-}
-
-.element__image {
-  height: 282px;
-  width: 282px;
-  object-fit: cover;
-  object-position: cover;
-}
-
-.element__name-box {
-  display: flex;
-  justify-content: space-between;
-  padding: 24px 16px 24px 20px;
-}
-
-.element__name {
-  font-weight: 900;
-  color: #000000;
-  font-size: 24px;
-  line-height: 29px;
-  margin: 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.element__heart {
-  opacity: 1;
-  cursor: pointer;
-  transition: all .2s ease;
-}
-
-.element__heart:hover {
-  opacity: .5;
 }

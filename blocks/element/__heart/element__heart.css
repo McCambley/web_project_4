@@ -1,0 +1,9 @@
+.element__heart {
+  opacity: 1;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.element__heart:hover {
+  opacity: .5;
+}
