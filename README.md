@@ -2,9 +2,11 @@
 
 ### Plan
 
-* Start
-* The
-* Project
+* Refactor: BEM file organization
+* Style: Make page responsive across devices
+* Feature: Introduce javascript to the equation
+
+* Also, start using branches man... c'mon.
 
 **Recent Updates**
 

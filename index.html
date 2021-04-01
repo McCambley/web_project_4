@@ -18,10 +18,21 @@
   <!-- Main body -->
   <main class="content">
 
+    <!-- Popup -->
+    <div class="popup">
+      <form action="#" class="popup__container">
+        <h2 class="popup__header">Edit Profile</h2>
+        <input type="text" id="name" name="name" required placeholder="Name" value="Jake McCambley" class="popup__name">
+        <input type="text" id="title" name="title" required placeholder="Title" value="Hiker" class="popup__title">
+        <button class="popup__save-button">Save</button>
+        <img src="./images/close.svg" alt="Close window" class="popup__close">
+      </form>
+    </div>
+
     <!-- Profile -->
     <section class="profile">
       <div class="profile__info-box">
-        <img src="./images/shaggy.jpeg" alt="Jacques Cousteau" class="profile__avatar">
+        <img src="./images/shaggy.jpeg" alt="Jake McCambley" class="profile__avatar">
         <div class="profile__text">
           <div class="profile__text-top">
             <h1 class="profile__name">Jake McCambley</h1>
@@ -29,7 +40,7 @@
               <img src="./images/edit.svg" alt="Edit profile" class="profile__edit-button-icon">
             </div>
           </div>
-          <h2 class="profile__title">Explorer</h2>
+          <h2 class="profile__title">Hiker</h2>
         </div>
       </div>
       <div class="profile__add-button">
@@ -43,20 +54,59 @@
 
       <!-- Element -->
       <div class="element">
-        <div class="element__image-container">
-          <img src="#" alt="Location">
-        </div>
+        <img class="element__image" src="./images/franconia-ridge.jpeg" alt="Franconia Ridge">
         <div class="element__name-box">
-          <h2 class="element__name"></h2>
-          <img src="#" alt="Like image" class="element__heart">
+          <h2 class="element__name">Franconia Ridge</h2>
+          <img src="./images/heart.svg" alt="Like image" class="element__heart">
         </div>
       </div>
 
-      <div class="element"></div>
-      <div class="element"></div>
-      <div class="element"></div>
-      <div class="element"></div>
-      <div class="element"></div>
+      <!-- Element -->
+      <div class="element">
+        <img class="element__image" src="./images/stratton.jpeg" alt="Stratton Pond">
+        <div class="element__name-box">
+          <h2 class="element__name">Stratton Pond</h2>
+          <img src="./images/heart.svg" alt="Like image" class="element__heart">
+        </div>
+      </div>
+
+      <!-- Element -->
+      <div class="element">
+        <img class="element__image" src="./images/penn2.jpeg" alt="Pennsylvania">
+        <div class="element__name-box">
+          <h2 class="element__name">Pennsylvania</h2>
+          <img src="./images/heart.svg" alt="Like image" class="element__heart">
+        </div>
+      </div>
+
+      <!-- Element -->
+      <div class="element">
+        <img class="element__image" src="./images/dragons-tooth.jpeg" alt="Dragon's Tooth">
+        <div class="element__name-box">
+          <h2 class="element__name">Dragon's Tooth</h2>
+          <img src="./images/heart.svg" alt="Like image" class="element__heart">
+        </div>
+      </div>
+
+      <!-- Element -->
+      <div class="element">
+        <img class="element__image" src="./images/pisgah.jpeg" alt="Pisgah National Forest">
+        <div class="element__name-box">
+          <h2 class="element__name">Pisgah National Forest</h2>
+          <img src="./images/heart.svg" alt="Like image" class="element__heart">
+        </div>
+      </div>
+
+      <!-- Element -->
+      <div class="element">
+        <img class="element__image" src="./images/franklin.jpeg" alt="Georgia">
+        <div class="element__name-box">
+          <h2 class="element__name">Georgia</h2>
+          <img src="./images/heart.svg" alt="Like image" class="element__heart">
+        </div>
+      </div>
+
+
     </article>
 
   </main>
