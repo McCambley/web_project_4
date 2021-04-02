@@ -1,5 +1,7 @@
 # Project 4: Around The U.S.
 
+## [Check out this project live!](https://mccambley.github.io/web_project_4/)
+
 ### Plan
 
 * Style: Make page responsive across devices
@@ -24,3 +26,4 @@
 **Figma**
 
 * [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+
