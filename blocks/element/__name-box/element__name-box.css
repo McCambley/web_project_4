@@ -2,5 +2,5 @@
 .element__name-box {
   display: flex;
   justify-content: space-between;
-  padding: 24px 16px 24px 20px;
+  padding: 24px 20px 24px;
 }

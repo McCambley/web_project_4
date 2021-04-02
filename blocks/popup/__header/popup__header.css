@@ -5,3 +5,9 @@
   margin: 0;
   margin-bottom: 54px;
 }
+
+@media (max-width: 480px) {
+  .popup__header {
+    margin-bottom: 76px;
+  }
+}

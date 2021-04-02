@@ -4,3 +4,10 @@
   font-weight: 400;
   margin: 0;
 }
+
+@media (max-width: 480px) {
+  .profile__title {
+    font-size: 14px;
+    line-height: 16px;
+  }
+}

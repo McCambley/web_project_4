@@ -2,7 +2,6 @@
 
 ### Plan
 
-* Refactor: BEM file organization
 * Style: Make page responsive across devices
 * Feature: Introduce javascript to the equation
 

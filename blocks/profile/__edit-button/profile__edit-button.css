@@ -18,3 +18,24 @@
 .profile__edit-button:hover {
   opacity: .6;
 }
+
+@media (max-width: 768px) {
+  .profile__edit-button {
+    /* Depending on canonical requirements - remove absolute positioning */
+    position: absolute;
+    right: -34px;
+    bottom: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile__edit-button {
+    /* Depending on canonical requirements - remove absolute positioning */
+    right: -24px;
+    bottom: 13px;
+    /* margin-left: 10px; */
+    height: 18px;
+    width: 18px;
+    padding: 5px;
+  }
+}
