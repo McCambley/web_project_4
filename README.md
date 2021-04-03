@@ -6,6 +6,8 @@
 
 * Style: Make page responsive across devices
 * Feature: Introduce javascript to the equation
+  * Toggle background image of heart div with a modifier (or use inline SVG)
+  * Edit name of user with the edit feature
 
 * Also, start using branches man... c'mon.
 

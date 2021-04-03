@@ -5,7 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/index.css">
-  <script src="./index.js"></script>
   <title>Around the U.S.</title>
 </head>
 <body class="page">
@@ -22,9 +21,9 @@
     <div class="popup">
       <form action="#" class="popup__container">
         <h2 class="popup__header">Edit Profile</h2>
-        <input type="text" id="name" name="name" required placeholder="Name" value="Jake McCambley" class="popup__name">
-        <input type="text" id="title" name="title" required placeholder="Title" value="Hiker" class="popup__title">
-        <button class="popup__save-button">Save</button>
+        <input type="text" id="name" name="name" required placeholder="Name" class="popup__name">
+        <input type="text" id="title" name="title" required placeholder="Title" class="popup__title">
+        <button type="button" class="popup__save-button">Save</button>
         <img src="./images/close.svg" alt="Close window" class="popup__close">
       </form>
     </div>
@@ -57,7 +56,7 @@
         <img class="element__image" src="./images/franconia-ridge.jpeg" alt="Franconia Ridge">
         <div class="element__name-box">
           <h2 class="element__name">Franconia Ridge</h2>
-          <img src="./images/heart.svg" alt="Like image" class="element__heart">
+          <div class="element__heart" role="img" aria-label="Like image"></div>
         </div>
       </div>
 
@@ -66,7 +65,7 @@
         <img class="element__image" src="./images/stratton.jpeg" alt="Stratton Pond">
         <div class="element__name-box">
           <h2 class="element__name">Stratton Pond</h2>
-          <img src="./images/heart.svg" alt="Like image" class="element__heart">
+          <div class="element__heart" role="img" aria-label="Like image"></div>
         </div>
       </div>
 
@@ -75,7 +74,7 @@
         <img class="element__image" src="./images/penn2.jpeg" alt="Pennsylvania">
         <div class="element__name-box">
           <h2 class="element__name">Pennsylvania</h2>
-          <img src="./images/heart.svg" alt="Like image" class="element__heart">
+          <div class="element__heart" role="img" aria-label="Like image"></div>
         </div>
       </div>
 
@@ -84,7 +83,7 @@
         <img class="element__image" src="./images/dragons-tooth.jpeg" alt="Dragon's Tooth">
         <div class="element__name-box">
           <h2 class="element__name">Dragon's Tooth</h2>
-          <img src="./images/heart.svg" alt="Like image" class="element__heart">
+          <div class="element__heart" role="img" aria-label="Like image"></div>
         </div>
       </div>
 
@@ -93,7 +92,7 @@
         <img class="element__image" src="./images/pisgah.jpeg" alt="Pisgah National Forest">
         <div class="element__name-box">
           <h2 class="element__name">Pisgah National Forest</h2>
-          <img src="./images/heart.svg" alt="Like image" class="element__heart">
+          <div class="element__heart" role="img" aria-label="Like image"></div>
         </div>
       </div>
 
@@ -102,19 +101,18 @@
         <img class="element__image" src="./images/franklin.jpeg" alt="Georgia">
         <div class="element__name-box">
           <h2 class="element__name">Georgia</h2>
-          <img src="./images/heart.svg" alt="Like image" class="element__heart">
+          <div class="element__heart" role="img" aria-label="Like image"></div>
         </div>
       </div>
-
 
     </article>
 
   </main>
 
-
   <!-- Footer -->
   <footer class="footer">
     <p class="footer__copyright">&copy; 2021 Around the U.S.</p>
   </footer>
+  <script src="./index.js"></script>
 </body>
 </html>
