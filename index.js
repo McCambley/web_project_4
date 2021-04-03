@@ -14,9 +14,10 @@ let profileEditor = document.querySelector(".popup");
 let allHearts = document.querySelectorAll(".element__heart");
 
 // No functional use beyond bug testing
-let heart = document.querySelector(".element__heart");
+// let heart = document.querySelector(".element__heart");
 
-let profileText = document.querySelector(".profile__text");
+// Selects all profile text, including edit icon
+// let profileText = document.querySelector(".profile__text");
 
 let profile = {
   name: document.querySelector(".profile__name").textContent,
@@ -33,7 +34,7 @@ for (let i = 0; i < allHearts.length; i++) {
 }
 
 function likeImage() {
-  console.log("Liked!");
+  // console.log("Liked!");
   document.querySelector(".element__heart").classList.toggle("element__heart_liked");
 }
 
@@ -42,17 +43,16 @@ function updateProfile() {
     name: document.querySelector(".profile__name").textContent,
     title: document.querySelector(".profile__title").textContent
   }
-  console.log("profile updated")
+  // console.log("profile object updated")
 }
 
 function editProfile() {
   updateProfile();
-  console.log("Editing profile!");
+  // console.log("Editing profile!");
   document.querySelector(".popup__name").value = profile.name;
   document.querySelector(".popup__title").value = profile.title;
   profileEditor.classList.add("popup_opened");
 
-  // test
   body.addEventListener('keyup', quickSave);
 }
 
@@ -63,14 +63,14 @@ function saveProfile() {
   document.querySelector(".profile__name").textContent = newName;
   document.querySelector(".profile__title").textContent = newTitle;
 
+  updateProfile();
   closeEditor();
 }
 
 function closeEditor() {
-  console.log("Closing Editor");
+  // console.log("Closing Editor");
   profileEditor.classList.remove("popup_opened");
 
-  // test
   body.removeEventListener('keyup', quickSave);
 
 }
@@ -84,7 +84,7 @@ function quickSave(e) {
 }
 
 function addImage() {
-  console.log("The people really want this feature");
+  // console.log("The people really want this feature");
   alert("Currently working on this functionality! For now, enjoy these pretty pictures!");
 }
 
