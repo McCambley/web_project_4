@@ -2,7 +2,9 @@
 
 ## [Check out this project live!](https://mccambley.github.io/web_project_4/)
 
-### Plan
+### Overview
+
+### Technologies Used
 
 * Style: Make page responsive across devices
 * Feature: Introduce javascript to the equation
