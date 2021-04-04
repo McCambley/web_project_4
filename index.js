@@ -5,24 +5,21 @@ let editButton = document.querySelector(".profile__edit-button");
 
 let closeButton = document.querySelector(".popup__close");
 
-let addButton = document.querySelector(".profile__add-button");
-
-let saveButton = document.querySelector(".popup__save-button");
-
 let profileEditor = document.querySelector(".popup");
 
+let profileEditorForm = document.querySelector(".popup__container");
+
 let allHearts = document.querySelectorAll(".element__heart");
+
+// Retrieve profile object on page load
+let profile = {};
+updateProfile();
 
 // No functional use beyond bug testing
 // let heart = document.querySelector(".element__heart");
 
 // Selects all profile text, including edit icon
 // let profileText = document.querySelector(".profile__text");
-
-let profile = {
-  name: document.querySelector(".profile__name").textContent,
-  title: document.querySelector(".profile__title").textContent
-}
 
 // functions
 
@@ -31,11 +28,6 @@ for (let i = 0; i < allHearts.length; i++) {
   currentHeart.addEventListener('click', () => {
     currentHeart.classList.toggle("element__heart_liked");
   });
-}
-
-function likeImage() {
-  // console.log("Liked!");
-  document.querySelector(".element__heart").classList.toggle("element__heart_liked");
 }
 
 function updateProfile() {
@@ -56,7 +48,9 @@ function editProfile() {
   body.addEventListener('keyup', quickSave);
 }
 
-function saveProfile() {
+function saveProfile(e) {
+  e.preventDefault();
+
   let newName = document.querySelector(".popup__name").value;
   let newTitle = document.querySelector(".popup__title").value;
 
@@ -77,21 +71,43 @@ function closeEditor() {
 
 function quickSave(e) {
   if (e.key === 'Enter') {
-    saveProfile();
+    saveProfile(e);
   } else if (e.key === 'Escape') {
     closeEditor();
   }
-}
-
-function addImage() {
-  // console.log("The people really want this feature");
-  alert("Currently working on this functionality! For now, enjoy these pretty pictures!");
 }
 
 // event listeners
 
 editButton.addEventListener('click', editProfile);
 closeButton.addEventListener('click', closeEditor);
-addButton.addEventListener('click', addImage);
-saveButton.addEventListener('click', saveProfile);
+profileEditorForm.addEventListener('submit', saveProfile);
+
+
+
+// Variables for later iterations
+
+// let addButton = document.querySelector(".profile__add-button");
+
+// let saveButton = document.querySelector(".popup__save-button");
+
+
+
+// Functions for later iterations
+
+// function addImage() {
+//   // console.log("The people really want this feature");
+//   alert("Currently working on this functionality! For now, enjoy these pretty pictures!");
+// }
+
+// function likeImage() {
+//   console.log("Liked!");
+//   document.querySelector(".element__heart").classList.toggle("element__heart_liked");
+// }
+
+
+
+// Even listeners for later iterations
+
 // heart.addEventListener('click', likeImage);
+// addButton.addEventListener('click', addImage);
