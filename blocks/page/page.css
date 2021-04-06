@@ -14,8 +14,6 @@
   margin: 0 auto 0;
   padding: 45px 0 60px;
   box-sizing: border-box;
-  /* Purely for testing page before and development */
-  /* min-height: 100vh; */
 }
 
 @media (max-width: 480px) {
