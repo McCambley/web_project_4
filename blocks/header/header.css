@@ -3,13 +3,13 @@
   justify-content: flex-start;
   align-items: flex-start;
   border-bottom: 1px solid rgba(84,84,84, .7);
-  height: 75px;
+  min-height: 75px;
   max-width: 880px;
   margin: 0 auto 0;
 }
 
 @media (max-width: 480px) {
   .header {
-    height: 56px;
+    min-height: 56px;
   }
 }

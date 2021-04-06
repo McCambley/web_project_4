@@ -7,33 +7,25 @@ let closeButton = document.querySelector(".popup__close");
 
 let profileEditor = document.querySelector(".popup");
 
-let profileEditorForm = document.querySelector(".popup__container");
+let profileEditorForm = document.querySelector(".popup__form");
 
-let allHearts = document.querySelectorAll(".element__heart");
+let profileName = document.querySelector(".profile__name");
+
+let profileTitle = document.querySelector(".profile__title");
+
+let popupName = document.querySelector(".popup__input_role_name");
+
+let popupTitle = document.querySelector(".popup__input_role_title");
 
 // Retrieve profile object on page load
 let profile = {};
 updateProfile();
 
-// No functional use beyond bug testing
-// let heart = document.querySelector(".element__heart");
-
-// Selects all profile text, including edit icon
-// let profileText = document.querySelector(".profile__text");
-
 // functions
-
-for (let i = 0; i < allHearts.length; i++) {
-  let currentHeart = allHearts[i];
-  currentHeart.addEventListener('click', () => {
-    currentHeart.classList.toggle("element__heart_liked");
-  });
-}
-
 function updateProfile() {
   profile = {
-    name: document.querySelector(".profile__name").textContent,
-    title: document.querySelector(".profile__title").textContent
+    name: profileName.textContent,
+    title: profileTitle.textContent
   }
   // console.log("profile object updated")
 }
@@ -41,21 +33,22 @@ function updateProfile() {
 function editProfile() {
   updateProfile();
   // console.log("Editing profile!");
-  document.querySelector(".popup__name").value = profile.name;
-  document.querySelector(".popup__title").value = profile.title;
+  popupName.value = profile.name;
+  popupTitle.value = profile.title;
   profileEditor.classList.add("popup_opened");
 
-  body.addEventListener('keyup', quickSave);
+  body.addEventListener('keyup', function escOut(e) {
+    if (e.key === 'Escape') {
+      closeEditor();
+    }
+  });
 }
 
 function saveProfile(e) {
   e.preventDefault();
 
-  let newName = document.querySelector(".popup__name").value;
-  let newTitle = document.querySelector(".popup__title").value;
-
-  document.querySelector(".profile__name").textContent = newName;
-  document.querySelector(".profile__title").textContent = newTitle;
+  profileName.textContent = popupName.value;
+  profileTitle.textContent = popupTitle.value;
 
   updateProfile();
   closeEditor();
@@ -64,24 +57,14 @@ function saveProfile(e) {
 function closeEditor() {
   // console.log("Closing Editor");
   profileEditor.classList.remove("popup_opened");
-
-  body.removeEventListener('keyup', quickSave);
-
-}
-
-function quickSave(e) {
-  if (e.key === 'Enter') {
-    saveProfile(e);
-  } else if (e.key === 'Escape') {
-    closeEditor();
-  }
 }
 
 // event listeners
-
 editButton.addEventListener('click', editProfile);
 closeButton.addEventListener('click', closeEditor);
 profileEditorForm.addEventListener('submit', saveProfile);
+
+
 
 
 
@@ -91,6 +74,9 @@ profileEditorForm.addEventListener('submit', saveProfile);
 
 // let saveButton = document.querySelector(".popup__save-button");
 
+// let heart = document.querySelector(".element__heart");
+
+// let allHearts = document.querySelectorAll(".element__heart");
 
 
 // Functions for later iterations
@@ -105,9 +91,15 @@ profileEditorForm.addEventListener('submit', saveProfile);
 //   document.querySelector(".element__heart").classList.toggle("element__heart_liked");
 // }
 
+// for (let i = 0; i < allHearts.length; i++) {
+//   let currentHeart = allHearts[i];
+//   currentHeart.addEventListener('click', () => {
+//     currentHeart.classList.toggle("element__heart_liked");
+//   });
+// }
 
 
-// Even listeners for later iterations
+// Event listeners for later iterations
 
 // heart.addEventListener('click', likeImage);
 // addButton.addEventListener('click', addImage);

@@ -17,19 +17,6 @@
   <!-- Main body -->
   <main class="content">
 
-    <!-- Popup -->
-    <div class="popup">
-      <form action="#" name="Update profile" class="popup__container">
-        <h2 class="popup__header">Edit Profile</h2>
-        <input type="text" id="name" name="name" required placeholder="Name" class="popup__name">
-        <input type="text" id="title" name="title" required placeholder="Title" class="popup__title">
-        <button type="submit" class="popup__save-button">Save</button>
-        <button type="button" class="popup__close">
-          <!-- <img src="./images/close.svg" alt="Close window" class="popup__close"> -->
-        </button>
-      </form>
-    </div>
-
     <!-- Profile -->
     <section class="profile">
       <div class="profile__info-box">
@@ -37,78 +24,78 @@
         <div class="profile__text">
           <div class="profile__text-top">
             <h1 class="profile__name">Jake McCambley</h1>
-            <button type="button" name="Edit profile" class="profile__edit-button">
+            <button type="button" name="Edit profile" class="profile__edit-button" aria-label="Edit profile">
               <!-- removed button icon in place of icon as background image of button -->
               <!-- <img src="./images/edit.svg" alt="Edit profile" class="profile__edit-button-icon"> -->
             </button>
           </div>
-          <h2 class="profile__title">Hiker</h2>
+          <p class="profile__title">Hiker</p>
         </div>
       </div>
-      <button type="button" name="Add image" class="profile__add-button">
+      <button type="button" name="Add image" class="profile__add-button" aria-label="Add image">
         <!-- removed button icon in place of icon as background image of button -->
         <!-- <img src="./images/add-image.svg" alt="Add image" class="profile__add-button-icon"> -->
       </button>
     </section>
 
     <!-- Elements -->
-    <article class="elements">
+    <section class="elements">
 
       <!-- Element -->
-      <div class="element">
+      <article class="element">
         <img class="element__image" src="./images/franconia-ridge.jpeg" alt="Franconia Ridge">
         <div class="element__name-box">
           <h2 class="element__name">Franconia Ridge</h2>
-          <button type="button" name="Like image" class="element__heart"></button>
+          <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
         </div>
-      </div>
+      </article>
 
       <!-- Element -->
-      <div class="element">
+      <article class="element">
         <img class="element__image" src="./images/stratton.jpeg" alt="Stratton Pond">
         <div class="element__name-box">
           <h2 class="element__name">Stratton Pond</h2>
-          <button type="button" name="Like image" class="element__heart"></button>
+          <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
         </div>
-      </div>
+      </article>
 
       <!-- Element -->
-      <div class="element">
+      <article class="element">
         <img class="element__image" src="./images/penn2.jpeg" alt="Pennsylvania">
         <div class="element__name-box">
           <h2 class="element__name">Pennsylvania</h2>
-          <button type="button" name="Like image" class="element__heart"></button>
+          <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
         </div>
-      </div>
+      </article>
 
       <!-- Element -->
-      <div class="element">
+      <article class="element">
         <img class="element__image" src="./images/dragons-tooth.jpeg" alt="Dragon's Tooth">
         <div class="element__name-box">
           <h2 class="element__name">Dragon's Tooth</h2>
-          <button type="button" name="Like image" class="element__heart"></button>
+          <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
         </div>
-      </div>
+      </article>
 
       <!-- Element -->
-      <div class="element">
+      <article class="element">
         <img class="element__image" src="./images/pisgah.jpeg" alt="Pisgah National Forest">
         <div class="element__name-box">
           <h2 class="element__name">Pisgah National Forest</h2>
-          <button type="button" name="Like image" class="element__heart"></button>
+          <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
         </div>
-      </div>
+      </article>
 
       <!-- Element -->
-      <div class="element">
+      <article class="element">
         <img class="element__image" src="./images/franklin.jpeg" alt="Georgia">
         <div class="element__name-box">
           <h2 class="element__name">Georgia</h2>
-          <button type="button" name="Like image" class="element__heart"></button>
+          <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
         </div>
-      </div>
+      </article>
 
-    </article>
+    </section>
 
   </main>
 
@@ -116,6 +103,29 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2021 Around the U.S.</p>
   </footer>
-  <script src="./index.js"></script>
+
+  <!-- Popup -->
+  <div class="popup">
+    <div class="popup__container">
+      <form action="#" name="Update profile" class="popup__form">
+        <h2 class="popup__header">Edit Profile</h2>
+        <div class="popup__input-container">
+          <input type="text" id="name" name="name" placeholder="Name" class="popup__input popup__input_role_name" required>
+          <input type="text" id="title" name="title" placeholder="Title" class="popup__input popup__input_role_title" required>
+        </div>
+        <button type="submit" class="popup__save-button">Save</button>
+      </form>
+      <button type="button" class="popup__close" aria-label="Close"><!-- <img src="./images/close.svg" alt="Close window" class="popup__close"> --></button>
+    </div>
+  </div>
+
+  <script src="./scripts/index.js"></script>
 </body>
+<!-- Hey Marina thanks again for all of the input!
+I appreciate the input you provided at first glance prior to the
+first review when my fonts weren't working. Again, I'm learning
+a ton through this review process and appreciate the feedback!
+Take care! -->
 </html>
+
+
