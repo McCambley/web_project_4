@@ -1,21 +1,38 @@
 // variables
 let body = document.querySelector(".page");
 
-let editButton = document.querySelector(".profile__edit-button");
-
-let closeButton = document.querySelector(".popup__close");
-
-let profileEditor = document.querySelector(".popup");
-
-let profileEditorForm = document.querySelector(".popup__form");
-
 let profileName = document.querySelector(".profile__name");
 
 let profileTitle = document.querySelector(".profile__title");
 
+// Profile editor identifiers
+
+let editButton = document.querySelector(".profile__edit-button");
+
+let closeProfileEditor = document.querySelector(".popup__close_role_edit");
+
+let profileEditor = document.querySelector(".popup_role_edit");
+
+let profileEditorForm = document.querySelector(".popup__form_role_edit");
+
 let popupName = document.querySelector(".popup__input_role_name");
 
 let popupTitle = document.querySelector(".popup__input_role_title");
+
+
+// Image adder identifiers
+
+let addButton = document.querySelector(".profile__add-button");
+
+let closeImageAdder = document.querySelector(".popup__close_role_add");
+
+let newPlaceAdder = document.querySelector(".popup_role_add");
+
+let imageAdderForm = document.querySelector(".popup__form_role_add");
+
+let popupImageTitle = document.querySelector(".popup__input_role_image-title");
+
+let popupImageLink = document.querySelector(".popup__input_role_image-link");
 
 // Retrieve profile object on page load
 let profile = {};
@@ -25,8 +42,8 @@ updateProfile();
 function updateProfile() {
   profile = {
     name: profileName.textContent,
-    title: profileTitle.textContent
-  }
+    title: profileTitle.textContent,
+  };
   // console.log("profile object updated")
 }
 
@@ -37,11 +54,20 @@ function editProfile() {
   popupTitle.value = profile.title;
   profileEditor.classList.add("popup_opened");
 
-  body.addEventListener('keyup', function escOut(e) {
-    if (e.key === 'Escape') {
+  body.addEventListener("keyup", function escOut(e) {
+    if (e.key === "Escape") {
       closeEditor();
     }
   });
+}
+
+function addNewPlace() {
+  newPlaceAdder.classList.add("popup_opened");
+  console.log("it worked!")
+}
+
+function saveNewPlace() {
+  closeEditor();
 }
 
 function saveProfile(e) {
@@ -59,25 +85,26 @@ function closeEditor() {
   profileEditor.classList.remove("popup_opened");
 }
 
+function closeAdder() {
+  // console.log("Closing Editor");
+  newPlaceAdder.classList.remove("popup_opened");
+}
+
 // event listeners
-editButton.addEventListener('click', editProfile);
-closeButton.addEventListener('click', closeEditor);
-profileEditorForm.addEventListener('submit', saveProfile);
-
-
-
-
+editButton.addEventListener("click", editProfile);
+addButton.addEventListener('click', addNewPlace)
+closeProfileEditor.addEventListener("click", closeEditor);
+closeImageAdder.addEventListener("click", closeAdder);
+profileEditorForm.addEventListener("submit", saveProfile);
 
 // Variables for later iterations
 
-// let addButton = document.querySelector(".profile__add-button");
 
 // let saveButton = document.querySelector(".popup__save-button");
 
 // let heart = document.querySelector(".element__heart");
 
 // let allHearts = document.querySelectorAll(".element__heart");
-
 
 // Functions for later iterations
 
@@ -97,7 +124,6 @@ profileEditorForm.addEventListener('submit', saveProfile);
 //     currentHeart.classList.toggle("element__heart_liked");
 //   });
 // }
-
 
 // Event listeners for later iterations
 

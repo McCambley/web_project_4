@@ -14,7 +14,10 @@
 
 .popup {
   background-color: rgba(0, 0, 0, .5);
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .3s ease, opacity .3s ease;
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
