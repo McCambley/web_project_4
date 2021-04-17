@@ -41,60 +41,6 @@
     <!-- Elements -->
     <section class="elements">
 
-      <!-- Element -->
-      <article class="element">
-        <img class="element__image" src="./images/franconia-ridge.jpeg" alt="Franconia Ridge">
-        <div class="element__name-box">
-          <h2 class="element__name">Franconia Ridge</h2>
-          <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
-        </div>
-      </article>
-
-      <!-- Element -->
-      <article class="element">
-        <img class="element__image" src="./images/stratton.jpeg" alt="Stratton Pond">
-        <div class="element__name-box">
-          <h2 class="element__name">Stratton Pond</h2>
-          <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
-        </div>
-      </article>
-
-      <!-- Element -->
-      <article class="element">
-        <img class="element__image" src="./images/penn2.jpeg" alt="Pennsylvania">
-        <div class="element__name-box">
-          <h2 class="element__name">Pennsylvania</h2>
-          <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
-        </div>
-      </article>
-
-      <!-- Element -->
-      <article class="element">
-        <img class="element__image" src="./images/dragons-tooth.jpeg" alt="Dragon's Tooth">
-        <div class="element__name-box">
-          <h2 class="element__name">Dragon's Tooth</h2>
-          <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
-        </div>
-      </article>
-
-      <!-- Element -->
-      <article class="element">
-        <img class="element__image" src="./images/pisgah.jpeg" alt="Pisgah National Forest">
-        <div class="element__name-box">
-          <h2 class="element__name">Pisgah National Forest</h2>
-          <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
-        </div>
-      </article>
-
-      <!-- Element -->
-      <article class="element">
-        <img class="element__image" src="./images/franklin.jpeg" alt="Georgia">
-        <div class="element__name-box">
-          <h2 class="element__name">Georgia</h2>
-          <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
-        </div>
-      </article>
-
     </section>
 
   </main>
@@ -133,6 +79,18 @@
       <button type="button" class="popup__close popup__close_role_add" aria-label="Close"><!-- <img src="./images/close.svg" alt="Close window" class="popup__close"> --></button>
     </div>
   </div>
+
+   <!-- Element template -->
+   <template id="place-template">
+     <article class="element">
+      <img class="element__image" src="" alt="">
+      <div class="element__name-box">
+        <h2 class="element__name"></h2>
+        <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
+      </div>
+      <button type="button" name="Delete image" class="element__delete" aria-label="Delete photo"></button>
+    </article>
+   </template>
 
   <script src="./scripts/index.js"></script>
 </body>

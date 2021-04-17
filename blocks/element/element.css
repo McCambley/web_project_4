@@ -2,6 +2,7 @@
 @import url(./__image/element__image.css);
 @import url(./__name-box/element__name-box.css);
 @import url(./__name/element__name.css);
+@import url(./__delete/element__delete.css);
 
 /* modifiers */
 @import url(./__heart/_liked/element__heart_liked.css);
@@ -11,4 +12,5 @@
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
