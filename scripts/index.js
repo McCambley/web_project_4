@@ -21,6 +21,13 @@ let imageAdderForm = document.querySelector(".popup__form_role_add");
 let popupImageTitle = document.querySelector(".popup__input_role_image-title");
 let popupImageLink = document.querySelector(".popup__input_role_image-link");
 
+// Image preview identifier
+let imagePreview = document.querySelector(".popup_role_image");
+let closePreviewButton = document.querySelector(".popup__close_role_image");
+let popupImage = document.querySelector(".popup__image")
+let popupImageCaption = document.querySelector(".popup__caption")
+
+
 // Retrieve profile object on page load
 let profile = {};
 updateProfile();
@@ -28,28 +35,28 @@ updateProfile();
 // Initial images object
 const initialCards = [
   {
-    name: "Franconia Ridge",
-    link: "./images/franconia-ridge.jpeg"
-  },
-  {
-    name: "Stratton Pond",
-    link: "./images/stratton.jpeg"
-  },
-  {
-    name: "Pennsylvania",
-    link: "./images/penn2.jpeg"
-  },
-  {
-    name: "Dragon's Tooth",
-    link: "./images/dragons-tooth.jpeg"
+    name: "Georgia",
+    link: "./images/franklin.jpeg"
   },
   {
     name: "Pisgah National Forest",
     link: "./images/pisgah.jpeg"
   },
   {
-    name: "Georgia",
-    link: "./images/franklin.jpeg"
+    name: "Dragon's Tooth",
+    link: "./images/dragons-tooth.jpeg"
+  },
+  {
+    name: "Pennsylvania",
+    link: "./images/penn2.jpeg"
+  },
+  {
+    name: "Stratton Pond",
+    link: "./images/stratton.jpeg"
+  },
+  {
+    name: "Franconia Ridge",
+    link: "./images/franconia-ridge.jpeg"
   }
 ];
 
@@ -105,11 +112,14 @@ function addPlace(title, link) {
   const likeButton = newPlace.querySelector(".element__heart");
   likeButton.addEventListener('click', e => e.target.classList.toggle("element__heart_liked"));
 
+  const placeImage = newPlace.querySelector(".element__image");
+  placeImage.addEventListener('click', openPreview);
+
   newPlace.querySelector('.element__name').textContent = title;
   newPlace.querySelector('.element__image').src = link;
   newPlace.querySelector('.element__image').alt = `${title}`;
 
-  placesContainer.append(newPlace);
+  placesContainer.prepend(newPlace);
 }
 
 function savePlace(e) {
@@ -139,11 +149,24 @@ function closeAdder() {
   newPlaceAdder.classList.remove("popup_opened");
 }
 
+function closePreview() {
+  // console.log("Closing preview");
+  imagePreview.classList.remove("popup_opened");
+}
+
+function openPreview(e) {
+  popupImage.src = e.target.src
+  popupImage.alt = e.target.alt
+  popupImageCaption.textContent = e.target.alt
+  imagePreview.classList.toggle("popup_opened");
+}
+
 // event listeners
 editButton.addEventListener("click", editProfile);
 addButton.addEventListener('click', openPlaceAdder)
 closeProfileEditor.addEventListener("click", closeEditor);
 closeImageAdder.addEventListener("click", closeAdder);
+closePreviewButton.addEventListener("click", closePreview);
 profileEditorForm.addEventListener("submit", saveProfile);
 imageAdderForm.addEventListener("submit", savePlace);
 
