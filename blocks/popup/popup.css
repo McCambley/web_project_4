@@ -10,8 +10,6 @@
 @import url(./__figure/popup__figure.css);
 
 /* Modifiers */
-@import url(./__input/_role/popup__input_role_name.css);
-@import url(./__input/_role/popup__input_role_title.css);
 @import url(./__container/_role/popup__container_role_image.css);
 
 .popup {
