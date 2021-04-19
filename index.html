@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./pages/index.css" />
   <title>Around the U.S.</title>
 </head>
-<body class="page">
 
+<body class="page">
   <!-- Header -->
   <header class="header">
-    <img src="./images/logo.svg" alt="Around the U.S." class="logo">
+    <img src="./images/logo.svg" alt="Around the U.S." class="logo" />
   </header>
 
   <!-- Main body -->
   <main class="content">
-
     <!-- Profile -->
     <section class="profile">
       <div class="profile__info-box">
-        <img src="./images/shaggy.jpeg" alt="Jake McCambley" class="profile__avatar">
+        <img src="./images/shaggy.jpeg" alt="Jake McCambley" class="profile__avatar" />
         <div class="profile__text">
           <div class="profile__text-top">
             <h1 class="profile__name">Jake McCambley</h1>
@@ -39,10 +39,7 @@
     </section>
 
     <!-- Elements -->
-    <section class="elements">
-
-    </section>
-
+    <section class="elements"></section>
   </main>
 
   <!-- Footer -->
@@ -56,12 +53,18 @@
       <form action="#" name="Update profile" class="popup__form popup__form_role_edit">
         <h2 class="popup__header">Edit Profile</h2>
         <div class="popup__input-container">
-          <input type="text" id="name" name="name" placeholder="Name" class="popup__input popup__input_role_name" required>
-          <input type="text" id="title" name="title" placeholder="Title" class="popup__input popup__input_role_title" required>
+          <input type="text" id="name" name="name" placeholder="Name" class="popup__input popup__input_role_name"
+            required />
+          <input type="text" id="title" name="title" placeholder="Title" class="popup__input popup__input_role_title"
+            required />
         </div>
-        <button type="submit" class="popup__save-button popup__save-button_role_edit">Save</button>
+        <button type="submit" class="popup__save-button popup__save-button_role_edit">
+          Save
+        </button>
       </form>
-      <button type="button" class="popup__close popup__close_role_edit" aria-label="Close"><!-- <img src="./images/close.svg" alt="Close window" class="popup__close"> --></button>
+      <button type="button" class="popup__close popup__close_role_edit" aria-label="Close">
+        <!-- <img src="./images/close.svg" alt="Close window" class="popup__close"> -->
+      </button>
     </div>
   </div>
 
@@ -71,35 +74,43 @@
       <form action="#" name="New place" class="popup__form popup__form_role_add">
         <h2 class="popup__header">New place</h2>
         <div class="popup__input-container">
-          <input type="text" id="title" name="name" placeholder="Title" class="popup__input popup__input_role_image-title" required>
-          <input type="url" id="image-link" name="title" placeholder="Image link" class="popup__input popup__input_role_image-link" required>
+          <input type="text" id="image-title" name="name" placeholder="Title"
+            class="popup__input popup__input_role_image-title" required />
+          <input type="url" id="image-link" name="title" placeholder="Image link"
+            class="popup__input popup__input_role_image-link" required />
         </div>
-        <button type="submit" class="popup__save-button popup__save-button_role_add">Create</button>
+        <button type="submit" class="popup__save-button popup__save-button_role_add">
+          Create
+        </button>
       </form>
-      <button type="button" class="popup__close popup__close_role_add" aria-label="Close"><!-- <img src="./images/close.svg" alt="Close window" class="popup__close"> --></button>
+      <button type="button" class="popup__close popup__close_role_add" aria-label="Close">
+        <!-- <img src="./images/close.svg" alt="Close window" class="popup__close"> -->
+      </button>
     </div>
   </div>
 
   <!-- Place view popup -->
   <div class="popup popup_role_image">
-    <figure class="popup__container popup__container_role_image">
-      <img src="" alt="" class="popup__image">
-      <figcaption class="popup__caption"></figcaption>
-      <button type="button" class="popup__close popup__close_role_image" aria-label="Close"><!-- <img src="./images/close.svg" alt="Close window" class="popup__close"> --></button>
-    </figure>
+    <div class="popup__container popup__container_role_image">
+      <figure class="popup__figure">
+        <img src="#" alt="" class="popup__image" />
+        <figcaption class="popup__caption"></figcaption>
+      </figure>
+      <button type="button" class="popup__close popup__close_role_image" aria-label="Close"></button>
+    </div>
   </div>
 
-   <!-- Element template -->
-   <template id="place-template">
-     <article class="element">
-      <img class="element__image" src="" alt="">
+  <!-- Element template -->
+  <template id="place-template">
+    <article class="element">
+      <img class="element__image" src="#" alt="" />
       <div class="element__name-box">
         <h2 class="element__name"></h2>
         <button type="button" name="Like image" class="element__heart" aria-label="Like photo"></button>
       </div>
       <button type="button" name="Delete image" class="element__delete" aria-label="Delete photo"></button>
     </article>
-   </template>
+  </template>
 
   <script src="./scripts/index.js"></script>
 </body>
@@ -108,6 +119,5 @@ I appreciate the input you provided at first glance prior to the
 first review when my fonts weren't working. Again, I'm learning
 a ton through this review process and appreciate the feedback!
 Take care! -->
+
 </html>
-
-
