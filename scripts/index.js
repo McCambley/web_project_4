@@ -75,6 +75,12 @@ function updateProfile() {
   };
 }
 
+// Global popup opener
+function openPopup(popup) {
+  popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closeWithEscape);
+}
+
 // Open profile editor
 function editProfile() {
   updateProfile();
@@ -82,31 +88,20 @@ function editProfile() {
   popupName.value = profile.name;
   popupTitle.value = profile.title;
   // Open popup with updated values
-  profileEditor.classList.add("popup_opened");
-  // Listen for escape button
-  body.addEventListener("keyup", function escOut(e) {
-    if (e.key === "Escape") {
-      closePopup();
-    }
-  });
+  openPopup(profileEditor);
 }
 
 // Open new place popup
 function openPlaceAdder() {
-  newPlaceAdder.classList.add("popup_opened");
+  // newPlaceAdder.classList.add("popup_opened");
+  openPopup(newPlaceAdder);
   // Refresh input values with blank strings
   popupImageTitle.value = "";
   popupImageLink.value = "";
-  // Listen for escape button
-  body.addEventListener("keyup", function escOut(e) {
-    if (e.key === "Escape") {
-      closePopup();
-    }
-  });
 }
 
-// Add new place to places container
-function addPlace(title, link) {
+// Create card before adding to DOM
+function createCard(title, link) {
   // Target and clone template to newPlace variable
   const placeTemplate = document.querySelector("#place-template").content;
   const newPlace = placeTemplate.querySelector(".element").cloneNode(true);
@@ -125,8 +120,15 @@ function addPlace(title, link) {
   placeImage.addEventListener("click", openPreview);
   // Update cloned content with argument values
   newPlace.querySelector(".element__name").textContent = title;
-  newPlace.querySelector(".element__image").src = link;
-  newPlace.querySelector(".element__image").alt = `${title}`;
+  placeImage.src = link;
+  placeImage.alt = `${title}`;
+  return newPlace;
+}
+
+// Add new place to places container
+function addPlace(title, link) {
+  // Create new card from template
+  const newPlace = createCard(title, link);
   // Prepend new place in the places container
   placesContainer.prepend(newPlace);
 }
@@ -152,9 +154,10 @@ function saveProfile(e) {
 
 // Universal popup closer for save, create, close, and escape buttons
 function closePopup() {
-  profileEditor.classList.remove("popup_opened");
-  newPlaceAdder.classList.remove("popup_opened");
-  imagePreview.classList.remove("popup_opened");
+  const openPopup = document.querySelector(".popup_opened");
+  openPopup.classList.remove("popup_opened");
+  // remove event listener on escape key
+  document.removeEventListener("keydown", closeWithEscape);
 }
 
 // open image preview popup
@@ -165,7 +168,14 @@ function openPreview(e) {
   // Update figure caption with alt text value
   popupImageCaption.textContent = e.target.alt;
   // Open updated popup
-  imagePreview.classList.toggle("popup_opened");
+  openPopup(imagePreview);
+}
+
+// close popup with escape button
+function closeWithEscape(e) {
+  if (e.key === "Escape") {
+    closePopup();
+  }
 }
 
 // event listeners
