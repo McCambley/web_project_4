@@ -11,6 +11,8 @@
 
 /* Modifiers */
 @import url(./__container/_role/popup__container_role_image.css);
+@import url(./__save-button/_disabled/popup__save-button_disabled.css);
+@import url(./__input/_invalid/popup__input_invalid.css);
 
 .popup {
   background-color: rgba(0, 0, 0, 0.5);
