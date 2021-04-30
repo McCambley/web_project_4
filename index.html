@@ -46,7 +46,7 @@
   <!-- Profile edit popup -->
   <div class="popup popup_role_edit">
     <div class="popup__container">
-      <form action="#" name="Update profile" class="popup__form popup__form_role_edit">
+      <form action="#" name="Update profile" class="popup__form popup__form_role_edit" novalidate>
         <h2 class="popup__header">Edit Profile</h2>
         <div class="popup__input-container">
           <input type="text" id="name" name="name" placeholder="Name" class="popup__input popup__input_role_name"
@@ -66,7 +66,7 @@
   <!-- Add image popup -->
   <div class="popup popup_role_add">
     <div class="popup__container">
-      <form action="#" name="New place" class="popup__form popup__form_role_add">
+      <form action="#" name="New place" class="popup__form popup__form_role_add" novalidate>
         <h2 class="popup__header">New place</h2>
         <div class="popup__input-container">
           <input type="text" id="image-title" name="name" placeholder="Title"
@@ -107,6 +107,7 @@
   </template>
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 
 </html>
