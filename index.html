@@ -46,13 +46,18 @@
   <!-- Profile edit popup -->
   <div class="popup popup_role_edit">
     <div class="popup__container">
-      <form action="#" name="Update profile" class="popup__form popup__form_role_edit" novalidate>
+      <form action="#" name="profile" class="popup__form popup__form_role_edit" novalidate>
         <h2 class="popup__header">Edit Profile</h2>
         <div class="popup__input-container">
+
           <input type="text" id="name" name="name" placeholder="Name" class="popup__input popup__input_role_name"
             required minlength="2" maxlength="40" />
+          <span class="popup__input-error popup__input-error_name"></span>
+
           <input type="text" id="title" name="title" placeholder="Title" class="popup__input popup__input_role_title"
             required minlength="2" maxlength="200" />
+          <span class="popup__input-error popup__input-error_title"></span>
+
         </div>
         <button type="submit" class="popup__save-button popup__save-button_role_edit">
           Save
@@ -66,13 +71,18 @@
   <!-- Add image popup -->
   <div class="popup popup_role_add">
     <div class="popup__container">
-      <form action="#" name="New place" class="popup__form popup__form_role_add" novalidate>
+      <form action="#" name="place" class="popup__form popup__form_role_add" novalidate>
         <h2 class="popup__header">New place</h2>
         <div class="popup__input-container">
-          <input type="text" id="image-title" name="name" placeholder="Title"
+
+          <input type="text" id="place" name="name" placeholder="Title"
             class="popup__input popup__input_role_image-title" required minlength="1" maxlength="30" />
-          <input type="url" id="image-link" name="title" placeholder="Image link"
+          <span class="popup__input-error popup__input-error_place"></span>
+
+          <input type="url" id="url" name="title" placeholder="Image link"
             class="popup__input popup__input_role_image-link" required />
+          <span class="popup__input-error popup__input-error_url"></span>
+
         </div>
         <button type="submit" class="popup__save-button popup__save-button_role_add">
           Create
