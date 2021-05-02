@@ -79,6 +79,19 @@ function updateProfile() {
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closeWithEscape);
+  document.addEventListener("click", closeOnOverlay);
+}
+
+// Universal popup closer for save, create, close, and escape buttons
+function closePopup() {
+  const openPopup = document.querySelector(".popup_opened");
+  const popupForm = openPopup.querySelector(".popup__form");
+  openPopup.classList.remove("popup_opened");
+  // remove event listener on escape key and overlay click
+  document.removeEventListener("keydown", closeWithEscape);
+  document.removeEventListener("click", closeOnOverlay);
+  // reset form if popup contains one
+  resetValidation(openPopup);
 }
 
 // Open profile editor
@@ -152,14 +165,6 @@ function saveProfile(e) {
   closePopup();
 }
 
-// Universal popup closer for save, create, close, and escape buttons
-function closePopup() {
-  const openPopup = document.querySelector(".popup_opened");
-  openPopup.classList.remove("popup_opened");
-  // remove event listener on escape key
-  document.removeEventListener("keydown", closeWithEscape);
-}
-
 // open image preview popup
 function openPreview(e) {
   // update popup nodes with target src and alt values
@@ -174,6 +179,13 @@ function openPreview(e) {
 // close popup with escape button
 function closeWithEscape(e) {
   if (e.key === "Escape") {
+    closePopup();
+  }
+}
+
+// close when click occurs on overlay
+function closeOnOverlay(e) {
+  if (e.target.classList.contains("popup_opened")) {
     closePopup();
   }
 }

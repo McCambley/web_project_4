@@ -61,6 +61,17 @@ function enableValidation() {
   });
 }
 
+// function resetValidation(formElement) {
+//   formElement.reset();
+// }
+
+function resetValidation(formParent) {
+  const popupForm = formParent.querySelector(".popup__form");
+  if (formParent.contains(popupForm)) {
+    popupForm.reset();
+  }
+}
+
 function hasInvalidInput(inputList) {
   return inputList.some((input) => {
     return !input.validity.valid;
