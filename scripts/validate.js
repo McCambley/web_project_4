@@ -33,12 +33,12 @@ function checkInputValidity(formElement, inputElement) {
   }
 }
 
-function createInputList(formElement) {
-  return Array.from(formElement.querySelectorAll(formItems.inputSelector));
+function createInputList(formElement, settings) {
+  return Array.from(formElement.querySelectorAll(settings.inputSelector));
 }
 
 function setEventListeners(formElement) {
-  const inputList = createInputList(formElement);
+  const inputList = createInputList(formElement, formItems);
   const buttonElement = formElement.querySelector(
     formItems.submitButtonSelector
   );

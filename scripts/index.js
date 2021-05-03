@@ -14,7 +14,7 @@ const popupTitle = document.querySelector(".popup__input_role_title");
 const profileSaveButton = document.querySelector(
   ".popup__save-button_role_edit"
 );
-const profileInputList = createInputList(profileEditorForm);
+const profileInputList = createInputList(profileEditorForm, formItems);
 
 // Image adder identifiers
 const addButton = document.querySelector(".profile__add-button");
@@ -26,7 +26,7 @@ const popupImageTitle = document.querySelector(
 );
 const popupImageLink = document.querySelector(".popup__input_role_image-link");
 const adderSaveButton = document.querySelector(".popup__save-button_role_add");
-const adderInputList = createInputList(imageAdderForm);
+const adderInputList = createInputList(imageAdderForm, formItems);
 
 // Image preview identifiers
 const imagePreview = document.querySelector(".popup_role_image");
