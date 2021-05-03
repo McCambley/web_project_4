@@ -11,6 +11,10 @@ const profileEditor = document.querySelector(".popup_role_edit");
 const profileEditorForm = document.querySelector(".popup__form_role_edit");
 const popupName = document.querySelector(".popup__input_role_name");
 const popupTitle = document.querySelector(".popup__input_role_title");
+const profileSaveButton = document.querySelector(
+  ".popup__save-button_role_edit"
+);
+const profileInputList = createInputList(profileEditorForm);
 
 // Image adder identifiers
 const addButton = document.querySelector(".profile__add-button");
@@ -21,6 +25,8 @@ const popupImageTitle = document.querySelector(
   ".popup__input_role_image-title"
 );
 const popupImageLink = document.querySelector(".popup__input_role_image-link");
+const adderSaveButton = document.querySelector(".popup__save-button_role_add");
+const adderInputList = createInputList(imageAdderForm);
 
 // Image preview identifiers
 const imagePreview = document.querySelector(".popup_role_image");
@@ -32,40 +38,10 @@ const popupImageCaption = document.querySelector(".popup__caption");
 let profile = {};
 updateProfile();
 
-// Initial images object
-const initialCards = [
-  {
-    name: "Georgia",
-    link: "./images/franklin.jpeg",
-  },
-  {
-    name: "Pisgah National Forest",
-    link: "./images/pisgah.jpeg",
-  },
-  {
-    name: "Dragon's Tooth",
-    link: "./images/dragons-tooth.jpeg",
-  },
-  {
-    name: "Pennsylvania",
-    link: "./images/penn2.jpeg",
-  },
-  {
-    name: "Stratton Pond",
-    link: "./images/stratton.jpeg",
-  },
-  {
-    name: "Franconia Ridge",
-    link: "./images/franconia-ridge.jpeg",
-  },
-];
-
 initialCards.forEach((place) => {
   // Populate page with initial places object
   addPlace(place.name, place.link);
 });
-
-// functions
 
 // Creates an object containing content of profile
 function updateProfile() {
@@ -85,13 +61,10 @@ function openPopup(popup) {
 // Universal popup closer for save, create, close, and escape buttons
 function closePopup() {
   const openPopup = document.querySelector(".popup_opened");
-  const popupForm = openPopup.querySelector(".popup__form");
   openPopup.classList.remove("popup_opened");
   // remove event listener on escape key and overlay click
   document.removeEventListener("keydown", closeWithEscape);
   document.removeEventListener("click", closeOnOverlay);
-  // reset form if popup contains one
-  resetValidation(openPopup);
 }
 
 // Open profile editor
@@ -101,14 +74,14 @@ function editProfile() {
   popupName.value = profile.name;
   popupTitle.value = profile.title;
   // Open popup with updated values
+  toggleButtonState(profileInputList, profileSaveButton);
   openPopup(profileEditor);
 }
 
 // Open new place popup
 function openPlaceAdder() {
-  // newPlaceAdder.classList.add("popup_opened");
+  toggleButtonState(adderInputList, adderSaveButton);
   openPopup(newPlaceAdder);
-  // Refresh input values with blank strings
   popupImageTitle.value = "";
   popupImageLink.value = "";
 }
@@ -152,6 +125,8 @@ function savePlace(e) {
   // Add place using form input values
   addPlace(popupImageTitle.value, popupImageLink.value);
   closePopup();
+  // reset form validation
+  resetValidation(imageAdderForm);
 }
 
 // Save updated profile form
@@ -163,6 +138,8 @@ function saveProfile(e) {
   // Update profile object with newly updated profile content
   updateProfile();
   closePopup();
+  // reset form validation
+  resetValidation(profileEditorForm);
 }
 
 // open image preview popup

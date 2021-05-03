@@ -33,10 +33,12 @@ function checkInputValidity(formElement, inputElement) {
   }
 }
 
+function createInputList(formElement) {
+  return Array.from(formElement.querySelectorAll(formItems.inputSelector));
+}
+
 function setEventListeners(formElement) {
-  const inputList = Array.from(
-    formElement.querySelectorAll(formItems.inputSelector)
-  );
+  const inputList = createInputList(formElement);
   const buttonElement = formElement.querySelector(
     formItems.submitButtonSelector
   );
@@ -49,9 +51,9 @@ function setEventListeners(formElement) {
   });
 }
 
-function enableValidation() {
+function enableValidation(settingsObject) {
   const formList = Array.from(
-    document.querySelectorAll(formItems.formSelector)
+    document.querySelectorAll(settingsObject.formSelector)
   );
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
@@ -61,15 +63,8 @@ function enableValidation() {
   });
 }
 
-// function resetValidation(formElement) {
-//   formElement.reset();
-// }
-
-function resetValidation(formParent) {
-  const popupForm = formParent.querySelector(".popup__form");
-  if (formParent.contains(popupForm)) {
-    popupForm.reset();
-  }
+function resetValidation(form) {
+  form.reset();
 }
 
 function hasInvalidInput(inputList) {
