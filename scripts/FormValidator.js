@@ -7,84 +7,18 @@ const formItems = {
   errorClass: "popup__input-error_active",
 };
 
-export default class FormValidator {
-  constructor(settings, formSelector) {}
+class FormValidator {
+  // constructor has two parameters
+  // one is a settings object that stores selectors an form classes
+  // second is a form element to be validated
+  constructor(settings, formElement) {}
+
+  // private mothods for processing the form
+  // checking the fields validity
+  // changing the state of the Submit button
+  // adding all the needed handlers
+
+  // one public method enableValidation() which enabled form validation
 }
 
-function showInputError(formElement, inputElement, errorMessage) {
-  const errorElement = formElement.querySelector(
-    `.popup__input-error_${inputElement.id}`
-  );
-  inputElement.classList.add(formItems.inputErrorClass);
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add(formItems.errorClass);
-}
-
-function hideInputError(formElement, inputElement) {
-  const errorElement = formElement.querySelector(
-    `.popup__input-error_${inputElement.id}`
-  );
-  inputElement.classList.remove(formItems.inputErrorClass);
-  errorElement.textContent = "";
-  errorElement.classList.remove(formItems.errorClass);
-}
-
-function checkInputValidity(formElement, inputElement) {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-}
-
-function createInputList(formElement, settings) {
-  return Array.from(formElement.querySelectorAll(settings.inputSelector));
-}
-
-function setEventListeners(formElement) {
-  const inputList = createInputList(formElement, formItems);
-  const buttonElement = formElement.querySelector(
-    formItems.submitButtonSelector
-  );
-  toggleButtonState(inputList, buttonElement);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-}
-
-function resetValidation(form) {
-  form.reset();
-}
-
-function hasInvalidInput(inputList) {
-  return inputList.some((input) => {
-    return !input.validity.valid;
-  });
-}
-
-function toggleButtonState(inputList, buttonElement) {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(formItems.inactiveButtonClass);
-    buttonElement.disabled = true;
-  } else {
-    buttonElement.classList.remove(formItems.inactiveButtonClass);
-    buttonElement.disabled = false;
-  }
-}
-
-function enableValidation(settingsObject) {
-  const formList = Array.from(
-    document.querySelectorAll(settingsObject.formSelector)
-  );
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-}
-
-enableValidation(formItems);
+// create an instance of the form validator class for each form that should be validated
