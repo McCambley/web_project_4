@@ -7,11 +7,15 @@ const formItems = {
   errorClass: "popup__input-error_active",
 };
 
-class FormValidator {
+export default class FormValidator {
   // constructor has two parameters
   // one is a settings object that stores selectors an form classes
   // second is a form element to be validated
   constructor(settings, formElement) {}
+
+  testInstance() {
+    console.log("Validator Exists");
+  }
 
   // private mothods for processing the form
   // checking the fields validity

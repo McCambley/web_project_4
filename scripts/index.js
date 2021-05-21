@@ -1,3 +1,12 @@
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+
+// const testCard = new Card({}, "");
+// const testFormVal = new FormValidator({}, "");
+
+// testCard.testInstance();
+// testFormVal.testInstance();
+
 // Body identifiers
 const body = document.querySelector(".page");
 const profileName = document.querySelector(".profile__name");

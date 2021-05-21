@@ -26,11 +26,15 @@ const initialCards = [
   },
 ];
 
-class Card {
+export default class Card {
   // takes card data - text and a link to the image - and a template element selector as parameters into the constructor
   constructor(card, templateSelector) {
     this._name = card.name;
     this._link = card.link;
+  }
+
+  testInstance() {
+    console.log("Card exists");
   }
 
   // private methods for working with markup and adding event handlers
