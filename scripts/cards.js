@@ -1,5 +1,5 @@
 // Initial images object
-const initialCards = [
+export const initialCards = [
   {
     name: "Georgia",
     link: "./images/franklin.jpeg",
@@ -25,3 +25,5 @@ const initialCards = [
     link: "./images/franconia-ridge.jpeg",
   },
 ];
+
+export default initialCards;

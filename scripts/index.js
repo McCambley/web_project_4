@@ -1,13 +1,13 @@
 import Card from "./Card.js";
+import initialCards from "./cards.js";
 import FormValidator from "./FormValidator.js";
 
-// const testCard = new Card({}, "");
-// const testFormVal = new FormValidator({}, "");
+const testFormVal = new FormValidator({}, "");
 
-// testCard.testInstance();
-// testFormVal.testInstance();
+testFormVal.testInstance();
 
 // Body identifiers
+
 const body = document.querySelector(".page");
 const profileName = document.querySelector(".profile__name");
 const profileTitle = document.querySelector(".profile__title");
@@ -23,7 +23,7 @@ const popupTitle = document.querySelector(".popup__input_role_title");
 const profileSaveButton = document.querySelector(
   ".popup__save-button_role_edit"
 );
-const profileInputList = createInputList(profileEditorForm, formItems);
+// const profileInputList = createInputList(profileEditorForm, formItems);
 
 // Image adder identifiers
 const addButton = document.querySelector(".profile__add-button");
@@ -35,21 +35,18 @@ const popupImageTitle = document.querySelector(
 );
 const popupImageLink = document.querySelector(".popup__input_role_image-link");
 const adderSaveButton = document.querySelector(".popup__save-button_role_add");
-const adderInputList = createInputList(imageAdderForm, formItems);
+// const adderInputList = createInputList(imageAdderForm, formItems);
 
 // Image preview identifiers
-const imagePreview = document.querySelector(".popup_role_image");
 const closePreviewButton = document.querySelector(".popup__close_role_image");
-const popupImage = document.querySelector(".popup__image");
-const popupImageCaption = document.querySelector(".popup__caption");
 
 // Retrieve profile object on page load
 let profile = {};
 updateProfile();
 
+// render initial cards object on page load
 initialCards.forEach((place) => {
-  // Populate page with initial places object
-  addPlace(place.name, place.link);
+  addPlace(place);
 });
 
 // Creates an object containing content of profile
@@ -95,37 +92,13 @@ function openPlaceAdder() {
   popupImageLink.value = "";
 }
 
-// Create card before adding to DOM
-function createCard(title, link) {
-  // Target and clone template to newPlace variable
-  const placeTemplate = document.querySelector("#place-template").content;
-  const newPlace = placeTemplate.querySelector(".element").cloneNode(true);
-  // Create event listener for cloned close button
-  const deleteButton = newPlace.querySelector(".element__delete");
-  deleteButton.addEventListener("click", (e) =>
-    e.target.parentElement.remove()
-  );
-  // Create event listener for cloned like button
-  const likeButton = newPlace.querySelector(".element__heart");
-  likeButton.addEventListener("click", (e) =>
-    e.target.classList.toggle("element__heart_liked")
-  );
-  // Create event listener on cloned image
-  const placeImage = newPlace.querySelector(".element__image");
-  placeImage.addEventListener("click", openPreview);
-  // Update cloned content with argument values
-  newPlace.querySelector(".element__name").textContent = title;
-  placeImage.src = link;
-  placeImage.alt = `${title}`;
-  return newPlace;
-}
-
 // Add new place to places container
-function addPlace(title, link) {
+function addPlace(data) {
   // Create new card from template
-  const newPlace = createCard(title, link);
+  const newPlace = new Card(data, "#place-template", openPopup);
+  const cardElement = newPlace.createCard();
   // Prepend new place in the places container
-  placesContainer.prepend(newPlace);
+  placesContainer.prepend(cardElement);
 }
 
 // Save custom place to page
@@ -149,17 +122,6 @@ function saveProfile(e) {
   closePopup();
   // reset form validation
   resetValidation(profileEditorForm);
-}
-
-// open image preview popup
-function openPreview(e) {
-  // update popup nodes with target src and alt values
-  popupImage.src = e.target.src;
-  popupImage.alt = e.target.alt;
-  // Update figure caption with alt text value
-  popupImageCaption.textContent = e.target.alt;
-  // Open updated popup
-  openPopup(imagePreview);
 }
 
 // close popup with escape button
