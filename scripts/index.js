@@ -108,11 +108,16 @@ function addPlace(data) {
 // Save custom place to page
 function savePlace(e) {
   e.preventDefault();
+  const newPlace = {
+    name: popupImageTitle.value,
+    link: popupImageLink.value,
+  };
   // Add place using form input values
-  addPlace(popupImageTitle.value, popupImageLink.value);
+  addPlace(newPlace);
   closePopup();
   // reset form validation
-  addPlaceValidation.resetValidation();
+  // addPlaceValidation.resetValidation();
+  e.target.reset();
 }
 
 // Save updated profile form
@@ -125,7 +130,8 @@ function saveProfile(e) {
   updateProfile();
   closePopup();
   // reset form validation
-  profileValidation.resetValidation();
+  // profileValidation.resetValidation();
+  e.target.reset();
 }
 
 // close popup with escape button
