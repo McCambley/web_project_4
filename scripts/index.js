@@ -1,10 +1,7 @@
 import Card from "./Card.js";
-import initialCards from "./cards.js";
 import FormValidator from "./FormValidator.js";
-
-const testFormVal = new FormValidator({}, "");
-
-testFormVal.testInstance();
+import initialCards from "./cards.js";
+import settings from "./settings.js";
 
 // Body identifiers
 
@@ -12,6 +9,7 @@ const body = document.querySelector(".page");
 const profileName = document.querySelector(".profile__name");
 const profileTitle = document.querySelector(".profile__title");
 const placesContainer = document.querySelector(".elements");
+let profile = {};
 
 // Profile editor identifiers
 const editButton = document.querySelector(".profile__edit-button");
@@ -40,8 +38,14 @@ const adderSaveButton = document.querySelector(".popup__save-button_role_add");
 // Image preview identifiers
 const closePreviewButton = document.querySelector(".popup__close_role_image");
 
+const addPlaceValidation = new FormValidator(settings, imageAdderForm);
+console.log(addPlaceValidation);
+const profileValidation = new FormValidator(settings, profileEditorForm);
+console.log(profileValidation);
+profileValidation.enableValidation();
+addPlaceValidation.enableValidation();
+
 // Retrieve profile object on page load
-let profile = {};
 updateProfile();
 
 // render initial cards object on page load
@@ -80,13 +84,13 @@ function editProfile() {
   popupName.value = profile.name;
   popupTitle.value = profile.title;
   // Open popup with updated values
-  toggleButtonState(profileInputList, profileSaveButton);
+  profileValidation.toggleButtonState();
   openPopup(profileEditor);
 }
 
 // Open new place popup
 function openPlaceAdder() {
-  toggleButtonState(adderInputList, adderSaveButton);
+  addPlaceValidation.toggleButtonState();
   openPopup(newPlaceAdder);
   popupImageTitle.value = "";
   popupImageLink.value = "";
@@ -108,7 +112,7 @@ function savePlace(e) {
   addPlace(popupImageTitle.value, popupImageLink.value);
   closePopup();
   // reset form validation
-  resetValidation(imageAdderForm);
+  addPlaceValidation.resetValidation();
 }
 
 // Save updated profile form
@@ -121,7 +125,7 @@ function saveProfile(e) {
   updateProfile();
   closePopup();
   // reset form validation
-  resetValidation(profileEditorForm);
+  profileValidation.resetValidation();
 }
 
 // close popup with escape button

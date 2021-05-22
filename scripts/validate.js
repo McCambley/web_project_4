@@ -55,20 +55,6 @@ function setEventListeners(formElement) {
   });
 }
 
-// function
-function enableValidation(settingsObject) {
-  const formList = Array.from(
-    document.querySelectorAll(settingsObject.formSelector)
-  );
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-}
-
-// unused?
 function resetValidation(form) {
   form.reset();
 }
@@ -89,6 +75,19 @@ function toggleButtonState(inputList, buttonElement) {
     buttonElement.classList.remove(formItems.inactiveButtonClass);
     buttonElement.disabled = false;
   }
+}
+
+// function
+function enableValidation(settingsObject) {
+  const formList = Array.from(
+    document.querySelectorAll(settingsObject.formSelector)
+  );
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement);
+  });
 }
 
 enableValidation(formItems);
