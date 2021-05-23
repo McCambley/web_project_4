@@ -12,14 +12,10 @@ export default class Card {
     this._openPopup = popupHandler;
   }
 
-  // private methods for each event handler
   _openPreview(e) {
-    // update popup nodes with target src and alt values
     popupImage.src = e.target.src;
     popupImage.alt = e.target.alt;
-    // Update figure caption with alt text value
     popupImageCaption.textContent = e.target.alt;
-    // Open updated popup
     this._openPopup(imagePreview);
   }
 
@@ -31,7 +27,6 @@ export default class Card {
     e.target.classList.toggle("element__heart_liked");
   }
 
-  // private method for setting event listeners
   _setEventListeners() {
     // Create event listener for cloned close button
     this._deleteButton = this._newPlace.querySelector(".element__delete");
@@ -46,9 +41,7 @@ export default class Card {
     this._placeImage.addEventListener("click", (e) => this._openPreview(e));
   }
 
-  // private method for working with markup
   _getTemplate() {
-    // Target and clone template to newPlace variable
     const cardElement = document
       .querySelector(this._templateSelector)
       .content.querySelector(".element")
@@ -56,12 +49,10 @@ export default class Card {
     return cardElement;
   }
 
-  // one public method that returns a full functional card element populated with data
   createCard() {
     this._newPlace = this._getTemplate();
     this._setEventListeners();
 
-    // Update cloned content with argument values
     this._newPlace.querySelector(".element__name").textContent = this._name;
     this._placeImage.src = this._link;
     this._placeImage.alt = `${this._name}`;

@@ -1,16 +1,4 @@
-// const formItems = {
-//   formSelector: ".popup__form",
-//   inputSelector: ".popup__input",
-//   submitButtonSelector: ".popup__save-button",
-//   inactiveButtonClass: "popup__save-button_disabled",
-//   inputErrorClass: "popup__input_invalid",
-//   errorClass: "popup__input-error_active",
-// };
-
 export default class FormValidator {
-  // constructor has two parameters
-  // one is a settings object that stores selectors an form classes
-  // second is a form element to be validated
   constructor(settings, formElement) {
     this._input = settings.inputSelector;
     this._submitButton = settings.submitButtonSelector;
@@ -58,10 +46,6 @@ export default class FormValidator {
       });
     });
   }
-
-  // resetValidation() {
-  //   this._form.reset();
-  // }
 
   _hasInvalidInput(inputList) {
     return inputList.some((input) => {
