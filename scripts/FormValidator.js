@@ -53,6 +53,7 @@ export default class FormValidator {
     });
   }
 
+  // This method is public as it's called externally each time a form popup opens
   toggleButtonState() {
     const button = this._form.querySelector(this._submitButton);
     if (this._hasInvalidInput(this._inputList)) {

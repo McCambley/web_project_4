@@ -6,9 +6,9 @@
 
 ## Recent Update
 
-- Users may now close popups by clicking outside the popup content
-- Forms are now validated using Javascript, rather than the default constraint validation
-- Forms will reset when a popup containing a form is closed
+- Code has been refactored to comply more accurately with the Object Oriented Programming (OOP) paradigm.
+- New class definitions (FormValidator and Card) prepare future iterations of the project for smoother scalability
+- Functionality has maintained it's wonderfully robust state
 
 ---
 
@@ -26,7 +26,7 @@
 - **Javascript**
 
   - This is the first project that contains any Javascript, which is very exciting. Specifically, this project implements [Event Listeners](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) to perform certain actions based on user events. Currently, this project will open an editor when the "edit" button is clicked, it will close the editor without saving if the "X" button, surrounding overlay, or the "Escape" key is actioned when a popup is open, it will save the form values when the "Save" button or the "Enter" key is actioned when the editor is opened, and it will toggle the appearance of the heart when an individual heart is clicked.
-  - Recent update adds functionality to the "+" button. Users may now input their own photos from external urls. The title added to the post will automatically set the alt attibute of the image as the value of the title inpue.
+  - Recent update adds functionality to the "+" button. Users may now input their own photos from external urls. The title added to the post will automatically set the alt attribute of the image as the value of the title input.
   - Users may now examine each photo in its original aspect ratio by clicked on an image to enlarge it.
   - "Like" and "Delete" functionality has been updated to allow users to interact with both initial posts and subsequently updated posts. In future releases, the state of each "Like" and "Delete" will remain after page refresh. Currently, all input data is erased on page refresh.
   - Forms are validated using Javascript, accessing each inputs ValidityState rather than utilizing the default constraint validation of the users browser
@@ -38,5 +38,6 @@
 
 - Save information (edited profile, uploaded photo, like photo) into a database for future reference after page refresh.
 - Allow user authentication.
+- Continue refactoring code into a more modular version of its current state
 
 ## [Check out this project live!](https://mccambley.github.io/web_project_4/)
