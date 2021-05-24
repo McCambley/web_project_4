@@ -13,9 +13,9 @@ export default class Card {
   }
 
   _openPreview(e) {
-    popupImage.src = e.target.src;
-    popupImage.alt = e.target.alt;
-    popupImageCaption.textContent = e.target.alt;
+    popupImage.src = this._link;
+    popupImage.alt = this._name;
+    popupImageCaption.textContent = this._name;
     this._openPopup(imagePreview);
   }
 

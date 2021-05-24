@@ -90,10 +90,13 @@ function openPlaceAdder() {
   popupImageLink.value = "";
 }
 
-function addPlace(data) {
+function createCard(data) {
   const newPlace = new Card(data, "#place-template", openPopup);
-  const cardElement = newPlace.createCard();
-  placesContainer.prepend(cardElement);
+  return newPlace.createCard();
+}
+
+function addPlace(data) {
+  placesContainer.prepend(createCard(data));
 }
 
 function savePlace(e) {

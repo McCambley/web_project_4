@@ -1,11 +1,12 @@
 export default class FormValidator {
   constructor(settings, formElement) {
     this._input = settings.inputSelector;
-    this._submitButton = settings.submitButtonSelector;
+    this._submitButtonSelector = settings.submitButtonSelector;
     this._inactiveButton = settings.inactiveButtonClass;
     this._inputErrorClass = settings.inputErrorClass;
     this._errorClass = settings.errorClass;
     this._form = formElement;
+    this._submitButton = this._form.querySelector(this._submitButtonSelector);
     this._inputList = Array.from(formElement.querySelectorAll(this._input));
   }
 
@@ -36,13 +37,12 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
-    const buttonElement = this._form.querySelector(this._submitButton);
-    this.toggleButtonState(this._inputList, buttonElement);
+    this.toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this.toggleButtonState(this._inputList, buttonElement);
+        this.toggleButtonState();
       });
     });
   }
@@ -55,13 +55,12 @@ export default class FormValidator {
 
   // This method is public as it's called externally each time a form popup opens
   toggleButtonState() {
-    const button = this._form.querySelector(this._submitButton);
     if (this._hasInvalidInput(this._inputList)) {
-      button.classList.add(this._inactiveButton);
-      button.disabled = true;
+      this._submitButton.classList.add(this._inactiveButton);
+      this._submitButton.disabled = true;
     } else {
-      button.classList.remove(this._inactiveButton);
-      button.disabled = false;
+      this._submitButton.classList.remove(this._inactiveButton);
+      this._submitButton.disabled = false;
     }
   }
 
