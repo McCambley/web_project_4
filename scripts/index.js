@@ -86,8 +86,9 @@ function editProfile() {
 function openPlaceAdder() {
   addPlaceValidation.toggleButtonState();
   openPopup(newPlaceAdder);
-  popupImageTitle.value = "";
-  popupImageLink.value = "";
+  // Code below would reset input values when popup is reopened
+  // popupImageTitle.value = "";
+  // popupImageLink.value = "";
 }
 
 function createCard(data) {
