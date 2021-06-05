@@ -10,13 +10,15 @@ export default class Section {
   }
 
   clear() {
+    console.log("Clearing container");
     this._container.innerHTML = ""; // Clear content of container
   }
 
   renderItems() {
-    this._container.clear();
+    this.clear();
 
     this._renderedItems.forEach((item) => {
+      console.log(item);
       this._renderer(item); // Iterate over array of data and append to the container
     });
   }

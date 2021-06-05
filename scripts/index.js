@@ -8,6 +8,7 @@ import settings from "./settings.js";
 const profileName = document.querySelector(".profile__name");
 const profileTitle = document.querySelector(".profile__title");
 const placesContainer = document.querySelector(".elements");
+const placesContainerSelector = ".elements";
 
 // Profile editor identifiers
 const editButton = document.querySelector(".profile__edit-button");
@@ -40,9 +41,9 @@ let profile = {};
 updateProfile();
 
 // render initial cards object on page load
-initialCards.forEach((place) => {
-  addPlace(place);
-});
+// initialCards.forEach((place) => {
+//   addPlace(place);
+// });
 
 editButton.addEventListener("click", editProfile);
 addButton.addEventListener("click", openPlaceAdder);
@@ -91,6 +92,20 @@ function openPlaceAdder() {
   // popupImageTitle.value = "";
   // popupImageLink.value = "";
 }
+
+const placeCards = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const newPlace = new Card(item, "#place-template", openPopup);
+      const cardElement = newPlace.createCard();
+      placeCards.setItems(cardElement);
+    },
+  },
+  placesContainerSelector
+);
+
+placeCards.renderItems();
 
 function createCard(data) {
   const newPlace = new Card(data, "#place-template", openPopup);
