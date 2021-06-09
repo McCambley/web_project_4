@@ -60,19 +60,19 @@ function updateProfile() {
   };
 }
 
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", closeWithEscape);
-  document.addEventListener("click", closeOnOverlay);
-}
+// function openPopup(popup) {
+//   popup.classList.add("popup_opened");
+//   document.addEventListener("keydown", closeWithEscape);
+//   document.addEventListener("click", closeOnOverlay);
+// }
 
-function closePopup() {
-  const openPopup = document.querySelector(".popup_opened");
-  openPopup.classList.remove("popup_opened");
+// function closePopup() {
+//   const openPopup = document.querySelector(".popup_opened");
+//   openPopup.classList.remove("popup_opened");
 
-  document.removeEventListener("keydown", closeWithEscape);
-  document.removeEventListener("click", closeOnOverlay);
-}
+//   document.removeEventListener("keydown", closeWithEscape);
+//   document.removeEventListener("click", closeOnOverlay);
+// }
 
 function editProfile() {
   updateProfile();
@@ -138,14 +138,14 @@ function saveProfile(e) {
   e.target.reset();
 }
 
-function closeWithEscape(e) {
-  if (e.key === "Escape") {
-    closePopup();
-  }
-}
+// function closeWithEscape(e) {
+//   if (e.key === "Escape") {
+//     closePopup();
+//   }
+// }
 
-function closeOnOverlay(e) {
-  if (e.target.classList.contains("popup_opened")) {
-    closePopup();
-  }
-}
+// function closeOnOverlay(e) {
+//   if (e.target.classList.contains("popup_opened")) {
+//     closePopup();
+//   }
+// }
