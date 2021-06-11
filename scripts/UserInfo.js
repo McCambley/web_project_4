@@ -7,8 +7,6 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    // const profileName = document.querySelector(".profile__name").textContent;
-    // const profileTitle = document.querySelector(".profile__title").textContent;
     this._name = this._profileName.textContent;
     this._title = this._profileTitle.textContent;
     const data = {
@@ -18,8 +16,8 @@ export default class UserInfo {
     return data;
   }
 
-  setUserInfo() {
-    this._profileName.textContent = this._name;
-    this._profileTitle.textContent = this._title;
+  setUserInfo(name, title) {
+    this._profileName.textContent = name;
+    this._profileTitle.textContent = title;
   }
 }

@@ -5,6 +5,7 @@ import initialCards from "./cards.js";
 import settings from "./settings.js";
 import PopupWithForm from "./PopupWithForm.js";
 import PopupWithImage from "./PopupWithImage.js";
+import UserInfo from "./UserInfo.js";
 
 const placesContainer = document.querySelector(".elements");
 const placesContainerSelector = ".elements";
@@ -14,20 +15,31 @@ const addButton = document.querySelector(".profile__add-button");
 const imageAdderForm = document.querySelector(".popup__form_role_add");
 const profileName = document.querySelector(".profile__name");
 const profileTitle = document.querySelector(".profile__title");
+const popupName = document.querySelector(".popup__input_role_name");
+const popupTitle = document.querySelector(".popup__input_role_title");
 
 const addPlaceValidation = new FormValidator(settings, imageAdderForm);
 const profileValidation = new FormValidator(settings, profileEditorForm);
 profileValidation.enableValidation();
 addPlaceValidation.enableValidation();
 
+const userInfo = new UserInfo(
+  profileName.textContent,
+  profileTitle.textContent
+);
+
+console.log(userInfo);
+
 const imagePreviewPopup = new PopupWithImage(".popup_role_image");
 imagePreviewPopup.setEventListeners();
+// Refactor with UserInfo Class
 const profileEditor = new PopupWithForm(
   ".popup_role_edit",
   ({ name, title }) => {
     console.log(name, title);
-    profileName.textContent = name;
-    profileTitle.textContent = title;
+    // profileName.textContent = name;
+    // profileTitle.textContent = title;
+    userInfo.setUserInfo(name, title);
     profileEditor.close();
   }
 );
@@ -35,18 +47,19 @@ profileEditor.setEventListeners();
 const imageAdderPopup = new PopupWithForm(
   ".popup_role_add",
   ({ name, link }) => {
-    // console.log(name, link);
-    // console.log({ name, link });
-    // console.log();
     initialCards.unshift({ name, link });
     placeCards.renderItems();
     imageAdderPopup.close();
-    // }
   }
 );
 imageAdderPopup.setEventListeners();
 
 editButton.addEventListener("click", () => {
+  // update input values with UserInfo
+  const data = userInfo.getUserInfo();
+  popupName.value = data.name;
+  popupTitle.value = data.title;
+  profileValidation.toggleButtonState();
   profileEditor.open();
 });
 addButton.addEventListener("click", () => {
@@ -89,8 +102,6 @@ function addPlace(data) {
 // Profile editor identifiers
 // const closeProfileEditor = document.querySelector(".popup__close_role_edit");
 //const profileEditor = document.querySelector(".popup_role_edit");
-//const popupName = document.querySelector(".popup__input_role_name");
-//const popupTitle = document.querySelector(".popup__input_role_title");
 
 // Image adder identifiers
 // const closeImageAdder = document.querySelector(".popup__close_role_add");
