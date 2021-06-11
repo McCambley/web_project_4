@@ -18,12 +18,6 @@ export default class Popup {
   }
 
   setEventListeners() {
-    // may need to put overlay event listener in here
-    // this._popup.addEventListener("click", (e) => {
-    //   if (e.target.classList.contains("popup__close")) {
-    //     this.close();
-    //   }
-    // });
     const closeButton = this._popup.querySelector(".popup__close");
     closeButton.addEventListener("click", () => {
       this.close();
@@ -43,19 +37,3 @@ export default class Popup {
     document.removeEventListener("click", this._handleOverlayClose);
   }
 }
-
-// function closePopup() {
-//
-// }
-
-// function openPopup(popup) {
-//
-// }
-
-// function closeWithEscape(e) {
-//
-// }
-
-// function closeOnOverlay(e) {
-//
-// }

@@ -7,13 +7,11 @@ export default class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    // collects data from all input fields
     const inputList = Array.from(this._popup.querySelectorAll(".popup__input"));
     const data = {};
     inputList.forEach((input) => {
       data[input.name] = input.value;
     });
-
     return data;
   }
 
@@ -28,7 +26,6 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    // modification of parent class - reset the form once the popup is closed
     const form = this._popup.querySelector(".popup__form");
     form.reset();
   }
