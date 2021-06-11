@@ -89,11 +89,6 @@ const placeCards = new Section(
 placeCards.renderItems();
 placeCards.renderItems();
 
-// function createCard(data) {
-//   const newPlace = new Card(data, "#place-template", openPopup);
-//   return newPlace.createCard();
-// }
-
 function addPlace(data) {
   placesContainer.prepend(createCard(data));
 }
