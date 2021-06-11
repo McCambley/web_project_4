@@ -6,9 +6,8 @@
 
 ## Recent Update
 
-- Code has been refactored to comply more accurately with the Object Oriented Programming (OOP) paradigm.
-- New class definitions (FormValidator and Card) prepare future iterations of the project for smoother scalability
-- Functionality has maintained it's wonderfully robust state
+- Code has been refactored to incorporate ES6 classes to create a scalable and flexible build
+- Project has been rebuilt with Webpack to increase cross-browser performance and reduce time to load. Live deployment of the project still runs on Github Pages' native webpack build, but soon that deployment will be updated to match the configuration seen in this repository.
 
 ---
 
@@ -32,12 +31,21 @@
   - Forms are validated using Javascript, accessing each inputs ValidityState rather than utilizing the default constraint validation of the users browser
 
 - **Git**
+
   - While this is invisible to the user, an important addition to this project was the use of a development branch with distinct feature branches implemented on initial page construction. When the page is live, work can still be done and committed in pieces without disturbing the live version of the page. Using branches in this way is real-world development, and the use of them on this individual project is practice for when we begin working on projects with others.
+
+- **ES6 Class Structure**
+
+  - Code has been refactored to incorporate ES6 classes. This refactor will (hopefully) increase readability which will assist with eventual scale increase down the line. Due to the inherant flexibility of ES6 classes, the codebase as a whole is more flexible and the modular structure is well prepared to incorporate more functionality into the page.
+
+- **Webpack**
+  - Webpack is a bundling tool that can be used to enhance performance and decrease load times. Webpack features utilized in this project reduce HTML and CSS file sizes, compile many JS modules into one output script, and prepare everything to work across all modern browsers. It's great, and now it's used here.
 
 ## Future Plans
 
 - Save information (edited profile, uploaded photo, like photo) into a database for future reference after page refresh.
 - Allow user authentication.
 - Continue refactoring code into a more modular version of its current state
+- Deploy pages using Webpack (current deployment is an older version of the project, compiled by Github itself)
 
 ## [Check out this project live!](https://mccambley.github.io/web_project_4/)
