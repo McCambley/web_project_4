@@ -8,7 +8,6 @@ export default class PopupWithForm extends Popup {
 
   _getInputValues() {
     // collects data from all input fields
-    // STOP HERE, ON RETURN USE INPUT IDENTIFIERS AS KEYS
     const inputList = Array.from(this._popup.querySelectorAll(".popup__input"));
     const data = {};
     inputList.forEach((input) => {
@@ -31,7 +30,8 @@ export default class PopupWithForm extends Popup {
     const submitButton = this._popup.querySelector(".popup__save-button");
 
     submitButton.addEventListener("click", () => {
-      this._formSubmitHandler(this._getInputValues());
+      const values = this._getInputValues();
+      this._formSubmitHandler(values);
     });
   }
 

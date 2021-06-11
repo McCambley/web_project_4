@@ -12,6 +12,8 @@ const editButton = document.querySelector(".profile__edit-button");
 const profileEditorForm = document.querySelector(".popup__form_role_edit");
 const addButton = document.querySelector(".profile__add-button");
 const imageAdderForm = document.querySelector(".popup__form_role_add");
+const profileName = document.querySelector(".profile__name");
+const profileTitle = document.querySelector(".profile__title");
 
 const addPlaceValidation = new FormValidator(settings, imageAdderForm);
 const profileValidation = new FormValidator(settings, profileEditorForm);
@@ -20,31 +22,28 @@ addPlaceValidation.enableValidation();
 
 const imagePreviewPopup = new PopupWithImage(".popup_role_image");
 imagePreviewPopup.setEventListeners();
-const profileEditor = new PopupWithForm(".popup_role_edit", (data) => {
-  console.log(data);
-  // function saveProfile(e) {
-  //   e.preventDefault();
-  //   profileName.textContent = popupName.value;
-  //   profileTitle.textContent = popupTitle.value;
-  //   updateProfile();
-  //   closePopup();
-  //   e.target.reset();
-  // }
-});
+const profileEditor = new PopupWithForm(
+  ".popup_role_edit",
+  ({ name, title }) => {
+    console.log(name, title);
+    profileName.textContent = name;
+    profileTitle.textContent = title;
+    profileEditor.close();
+  }
+);
 profileEditor.setEventListeners();
-const imageAdderPopup = new PopupWithForm(".popup_role_add", (data) => {
-  console.log(data);
-  // function savePlace(e) {
-  //   e.preventDefault();
-  //   const newPlace = {
-  //     name: popupImageTitle.value,
-  //     link: popupImageLink.value,
-  //   };
-  //   addPlace(newPlace);
-  //   closePopup();
-  //   e.target.reset();
-  // }
-});
+const imageAdderPopup = new PopupWithForm(
+  ".popup_role_add",
+  ({ name, link }) => {
+    // console.log(name, link);
+    // console.log({ name, link });
+    // console.log();
+    initialCards.unshift({ name, link });
+    placeCards.renderItems();
+    imageAdderPopup.close();
+    // }
+  }
+);
 imageAdderPopup.setEventListeners();
 
 editButton.addEventListener("click", () => {
@@ -75,6 +74,7 @@ const placeCards = new Section(
 );
 
 placeCards.renderItems();
+placeCards.renderItems();
 
 // function createCard(data) {
 //   const newPlace = new Card(data, "#place-template", openPopup);
@@ -85,8 +85,6 @@ function addPlace(data) {
   placesContainer.prepend(createCard(data));
 }
 // Body identifiers
-// const profileName = document.querySelector(".profile__name");
-// const profileTitle = document.querySelector(".profile__title");
 
 // Profile editor identifiers
 // const closeProfileEditor = document.querySelector(".popup__close_role_edit");
