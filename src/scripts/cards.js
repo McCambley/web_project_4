@@ -1,28 +1,35 @@
 // Initial images object
+import franklinSrc from "../images/franklin.jpeg"; // Georgia picture
+import pisgahSrc from "../images/pisgah.jpeg"; // Pisgah National Forest picture
+import dragonSrc from "../images/dragons-tooth.jpeg"; // Dragon's Tooth picture
+import pennSrc from "../images/penn2.jpeg"; // Pennsylvania picture
+import strattonSrc from "../images/stratton.jpeg"; // Stratton Pond picture
+import franconiaSrc from "../images/franconia-ridge.jpeg"; // Franconia Ridge picture
+
 export const initialCards = [
   {
     name: "Georgia",
-    link: "./images/franklin.jpeg",
+    link: franklinSrc,
   },
   {
     name: "Pisgah National Forest",
-    link: "./images/pisgah.jpeg",
+    link: pisgahSrc,
   },
   {
     name: "Dragon's Tooth",
-    link: "./images/dragons-tooth.jpeg",
+    link: dragonSrc,
   },
   {
     name: "Pennsylvania",
-    link: "./images/penn2.jpeg",
+    link: pennSrc,
   },
   {
     name: "Stratton Pond",
-    link: "./images/stratton.jpeg",
+    link: strattonSrc,
   },
   {
     name: "Franconia Ridge",
-    link: "./images/franconia-ridge.jpeg",
+    link: franconiaSrc,
   },
 ];
 

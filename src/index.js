@@ -1,3 +1,5 @@
+import "./pages/index.css"; // import primary stylesheet
+
 import Section from "./scripts/Section.js";
 import Card from "./scripts/Card.js";
 import FormValidator from "./scripts/FormValidator.js";
@@ -6,6 +8,11 @@ import settings from "./scripts/settings.js";
 import PopupWithForm from "./scripts/PopupWithForm.js";
 import PopupWithImage from "./scripts/PopupWithImage.js";
 import UserInfo from "./scripts/UserInfo.js";
+
+// LOAD IMAGES FOR WEBPACK
+import shaggySrc from "./images/shaggy.jpeg"; // Profile picture
+const shaggyImg = document.getElementById("shaggy");
+shaggyImg.src = shaggySrc;
 
 const placesContainer = document.querySelector(".elements");
 const placesContainerSelector = ".elements";
