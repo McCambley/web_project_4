@@ -5,30 +5,35 @@ import "./pages/index.css";
 import Section from "./scripts/Section.js";
 import Card from "./scripts/Card.js";
 import FormValidator from "./scripts/FormValidator.js";
-import initialCards from "./scripts/cards.js";
-import settings from "./scripts/settings.js";
 import PopupWithForm from "./scripts/PopupWithForm.js";
 import PopupWithImage from "./scripts/PopupWithImage.js";
 import UserInfo from "./scripts/UserInfo.js";
-
-// load images for webpack
+import logoSrc from "./images/logo.svg"; // Logo
 import shaggySrc from "./images/shaggy.jpeg"; // Profile picture
-const shaggyImg = document.getElementById("shaggy");
-shaggyImg.src = shaggySrc;
+import {
+  placesContainerSelector,
+  editButton,
+  profileEditorForm,
+  addButton,
+  imageAdderForm,
+  profileName,
+  profileTitle,
+  popupName,
+  popupTitle,
+  shaggyImg,
+  logoImg,
+  initialCards,
+  formItems,
+  setImageSource,
+} from "./utils/constants.js";
 
-const placesContainerSelector = ".elements";
-const editButton = document.querySelector(".profile__edit-button");
-const profileEditorForm = document.querySelector(".popup__form_role_edit");
-const addButton = document.querySelector(".profile__add-button");
-const imageAdderForm = document.querySelector(".popup__form_role_add");
-const profileName = document.querySelector(".profile__name");
-const profileTitle = document.querySelector(".profile__title");
-const popupName = document.querySelector(".popup__input_role_name");
-const popupTitle = document.querySelector(".popup__input_role_title");
+// set image sources for webpack
+setImageSource(shaggyImg, shaggySrc);
+setImageSource(logoImg, logoSrc);
 
 // initialize form validation
-const addPlaceValidation = new FormValidator(settings, imageAdderForm);
-const profileValidation = new FormValidator(settings, profileEditorForm);
+const addPlaceValidation = new FormValidator(formItems, imageAdderForm);
+const profileValidation = new FormValidator(formItems, profileEditorForm);
 profileValidation.enableValidation();
 addPlaceValidation.enableValidation();
 
@@ -53,7 +58,6 @@ const placeCards = new Section(
   placesContainerSelector
 );
 
-placeCards.renderItems();
 placeCards.renderItems();
 
 // initialize user information

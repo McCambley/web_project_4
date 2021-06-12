@@ -1,8 +1,3 @@
-// Image preview identifiers
-const imagePreview = document.querySelector(".popup_role_image");
-const popupImage = document.querySelector(".popup__image");
-const popupImageCaption = document.querySelector(".popup__caption");
-
 export default class Card {
   constructor({ card, handleCardClick }, templateSelector) {
     this._name = card.name;
