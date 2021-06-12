@@ -31,8 +31,7 @@ export default class Popup {
   }
 
   close() {
-    const openPopup = document.querySelector(".popup_opened");
-    openPopup.classList.remove("popup_opened");
+    this._popup.classList.remove("popup_opened");
     document.removeEventListener("keydown", this._handleEscClose);
     document.removeEventListener("click", this._handleOverlayClose);
   }
