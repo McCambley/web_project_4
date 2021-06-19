@@ -77,6 +77,17 @@ const profileEditor = new PopupWithForm(
   ({ name, title }) => {
     userInfo.setUserInfo(name, title);
     profileEditor.close();
+    fetch("https://around.nomoreparties.co/group-12/users/me", {
+      method: "PATCH",
+      headers: {
+        authorization: "d45050bb-6054-461f-a7d7-f299e145a1f0",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        about: title,
+      }),
+    });
   }
 );
 
@@ -106,3 +117,13 @@ editButton.addEventListener("click", () => {
 addButton.addEventListener("click", () => {
   imageAdderPopup.open();
 });
+
+// TEST Token: d45050bb-6054-461f-a7d7-f299e145a1f0 Group ID: group-12
+
+fetch("https://around.nomoreparties.co/group-12/users/me", {
+  headers: {
+    authorization: "d45050bb-6054-461f-a7d7-f299e145a1f0",
+  },
+})
+  .then((res) => res.json())
+  .then((res) => console.log(res));
