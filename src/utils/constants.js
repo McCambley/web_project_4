@@ -14,6 +14,10 @@ export const editButton = document.querySelector(".profile__edit-button");
 export const profileEditorForm = document.querySelector(
   ".popup__form_role_edit"
 );
+export const avatarButton = document.querySelector(".profile__avatar");
+export const avatarUpdateForm = document.querySelector(
+  ".popup__form_role_avatar"
+);
 export const addButton = document.querySelector(".profile__add-button");
 export const imageAdderForm = document.querySelector(".popup__form_role_add");
 export const profileName = document.querySelector(".profile__name");
