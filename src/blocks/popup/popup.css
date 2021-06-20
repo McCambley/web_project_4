@@ -15,6 +15,7 @@
 @import url(./__save-button/_disabled/popup__save-button_disabled.css);
 @import url(./__input/_invalid/popup__input_invalid.css);
 @import url(./__input-error/_active/popup__input-error_active.css);
+@import url(./__input-container/_role/popup__input-container_role_avatar.css);
 
 .popup {
   background-color: rgba(0, 0, 0, 0.5);
@@ -31,4 +32,3 @@
   left: 0;
   z-index: 1;
 }
-                             

@@ -16,6 +16,7 @@ import {
   editButton,
   profileEditorForm,
   avatarUpdateForm,
+  placeDeleteForm,
   avatarButton,
   addButton,
   imageAdderForm,
@@ -38,9 +39,11 @@ setImageSource(logoImg, logoSrc);
 const addPlaceValidation = new FormValidator(formItems, imageAdderForm);
 const profileValidation = new FormValidator(formItems, profileEditorForm);
 const avatarValidation = new FormValidator(formItems, avatarUpdateForm);
+const deleteValidation = new FormValidator(formItems, placeDeleteForm);
 profileValidation.enableValidation();
 addPlaceValidation.enableValidation();
 avatarValidation.enableValidation();
+deleteValidation.enableValidation();
 
 // initialize and populate places container
 const placeCards = new Section(
@@ -110,6 +113,16 @@ const imageAdderPopup = new PopupWithForm(
 
 imageAdderPopup.setEventListeners();
 
+// initialize place deleter form
+const placeDeletePopup = new PopupWithForm(
+  ".popup_role_delete",
+  ({ thing }) => {
+    console.log(thing);
+  }
+);
+
+placeDeletePopup.setEventListeners();
+
 // initialize  avatar update popup
 const avatarUpdatePopup = new PopupWithForm(
   ".popup_role_avatar",
@@ -140,11 +153,3 @@ avatarButton.addEventListener("click", () => {
 });
 
 // TEST Token: d45050bb-6054-461f-a7d7-f299e145a1f0 Group ID: group-12
-
-fetch("https://around.nomoreparties.co/group-12/users/me", {
-  headers: {
-    authorization: "d45050bb-6054-461f-a7d7-f299e145a1f0",
-  },
-})
-  .then((res) => res.json())
-  .then((res) => console.log(res));

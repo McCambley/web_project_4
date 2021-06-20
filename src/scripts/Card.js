@@ -8,6 +8,7 @@ export default class Card {
 
   _deletePlace(e) {
     e.target.parentElement.remove();
+    console.log(e.target.parentElement.querySelector(".element__image").src);
   }
 
   _toggleLike(e) {

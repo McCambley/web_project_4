@@ -18,6 +18,9 @@ export const avatarButton = document.querySelector(".profile__avatar");
 export const avatarUpdateForm = document.querySelector(
   ".popup__form_role_avatar"
 );
+export const placeDeleteForm = document.querySelector(
+  ".popup__form_role_delete"
+);
 export const addButton = document.querySelector(".profile__add-button");
 export const imageAdderForm = document.querySelector(".popup__form_role_add");
 export const profileName = document.querySelector(".profile__name");
