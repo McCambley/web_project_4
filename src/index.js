@@ -8,7 +8,7 @@ import FormValidator from "./scripts/FormValidator.js";
 import PopupWithForm from "./scripts/PopupWithForm.js";
 import PopupWithImage from "./scripts/PopupWithImage.js";
 import UserInfo from "./scripts/UserInfo.js";
-import Api from "./scripts/API.js";
+import Api from "./scripts/Api.js";
 import logoSrc from "./images/logo.svg"; // Logo
 import shaggySrc from "./images/shaggy.jpeg"; // Profile picture
 import {
@@ -35,6 +35,12 @@ import {
 setImageSource(shaggyImg, shaggySrc);
 setImageSource(logoImg, logoSrc);
 
+// connect with API
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/group-12",
+  authorization: "d45050bb-6054-461f-a7d7-f299e145a1f0",
+});
+
 // initialize form validation
 const addPlaceValidation = new FormValidator(formItems, imageAdderForm);
 const profileValidation = new FormValidator(formItems, profileEditorForm);
@@ -46,27 +52,28 @@ avatarValidation.enableValidation();
 deleteValidation.enableValidation();
 
 // initialize and populate places container
-const placeCards = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const newPlace = new Card(
-        {
-          card: item,
-          handleCardClick: (name, link) => {
-            imagePreviewPopup.open(name, link);
+api.getGroupCards().then((fetchedCards) => {
+  const placeCards = new Section(
+    {
+      items: fetchedCards,
+      renderer: (item) => {
+        const newPlace = new Card(
+          {
+            card: item,
+            handleCardClick: (name, link) => {
+              imagePreviewPopup.open(name, link);
+            },
           },
-        },
-        "#place-template"
-      );
-      const cardElement = newPlace.createCard();
-      placeCards.setItems(cardElement);
+          "#place-template"
+        );
+        const cardElement = newPlace.createCard();
+        placeCards.setItems(cardElement);
+      },
     },
-  },
-  placesContainerSelector
-);
-
-placeCards.renderItems();
+    placesContainerSelector
+  );
+  placeCards.renderItems();
+});
 
 // initialize user information
 const userInfo = new UserInfo(
@@ -85,17 +92,7 @@ const profileEditor = new PopupWithForm(
   ({ name, title }) => {
     userInfo.setUserInfo(name, title);
     profileEditor.close();
-    fetch("https://around.nomoreparties.co/group-12/users/me", {
-      method: "PATCH",
-      headers: {
-        authorization: "d45050bb-6054-461f-a7d7-f299e145a1f0",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        about: title,
-      }),
-    });
+    api.updateProfile(name, title);
   }
 );
 
@@ -151,5 +148,3 @@ addButton.addEventListener("click", () => {
 avatarButton.addEventListener("click", () => {
   avatarUpdatePopup.open();
 });
-
-// TEST Token: d45050bb-6054-461f-a7d7-f299e145a1f0 Group ID: group-12

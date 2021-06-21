@@ -7,6 +7,7 @@ export default class Card {
   }
 
   _deletePlace(e) {
+    const deleteImage = new Promise(function (resolve, reject) {});
     e.target.parentElement.remove();
     console.log(e.target.parentElement.querySelector(".element__image").src);
   }
@@ -18,6 +19,7 @@ export default class Card {
   _setEventListeners() {
     this._deleteButton = this._newPlace.querySelector(".element__delete");
     this._deleteButton.addEventListener("click", (e) => {
+      // newPromise here?
       this._deletePlace(e);
     });
 
