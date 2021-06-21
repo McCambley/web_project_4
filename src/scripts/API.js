@@ -50,7 +50,7 @@ export default class Api {
       });
   }
 
-  updateProfile(name, title) {
+  updateProfile({ name, about }) {
     return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
       headers: {
@@ -59,7 +59,7 @@ export default class Api {
       },
       body: JSON.stringify({
         name: name,
-        about: title,
+        about: about,
       }),
     });
   }

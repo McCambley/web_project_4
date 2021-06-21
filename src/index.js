@@ -51,6 +51,19 @@ addPlaceValidation.enableValidation();
 avatarValidation.enableValidation();
 deleteValidation.enableValidation();
 
+// initialize user information
+const userInfo = new UserInfo(
+  profileName.textContent,
+  profileTitle.textContent
+);
+
+// get user information
+api.getUserInfo().then((userData) => {
+  profileName.textContent = "Loading...";
+  profileTitle.textContent = "";
+  userInfo.setUserInfo(userData);
+});
+
 // initialize and populate places container
 api.getGroupCards().then((fetchedCards) => {
   const placeCards = new Section(
@@ -75,26 +88,17 @@ api.getGroupCards().then((fetchedCards) => {
   placeCards.renderItems();
 });
 
-// initialize user information
-const userInfo = new UserInfo(
-  profileName.textContent,
-  profileTitle.textContent
-);
-
 // initialize image preview popup
 const imagePreviewPopup = new PopupWithImage(".popup_role_image");
 
 imagePreviewPopup.setEventListeners();
 
 // initialize profile editor popup
-const profileEditor = new PopupWithForm(
-  ".popup_role_edit",
-  ({ name, title }) => {
-    userInfo.setUserInfo(name, title);
-    profileEditor.close();
-    api.updateProfile(name, title);
-  }
-);
+const profileEditor = new PopupWithForm(".popup_role_edit", (data) => {
+  userInfo.setUserInfo(data);
+  profileEditor.close();
+  api.updateProfile(data);
+});
 
 profileEditor.setEventListeners();
 
@@ -134,9 +138,9 @@ avatarUpdatePopup.setEventListeners();
 
 // add functionality to page buttons
 editButton.addEventListener("click", () => {
-  const data = userInfo.getUserInfo();
-  popupName.value = data.name;
-  popupTitle.value = data.title;
+  const { name, about } = userInfo.getUserInfo();
+  popupName.value = name;
+  popupTitle.value = about;
   profileValidation.toggleButtonState();
   profileEditor.open();
 });
