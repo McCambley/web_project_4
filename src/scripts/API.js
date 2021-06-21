@@ -94,6 +94,28 @@ export default class Api {
       });
   }
 
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._auth,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return Promise.reject(`${res.status} error!`);
+        }
+        return res.json();
+      })
+      .catch((err) =>
+        console.error(`There was a problem deleting cards: ${err}`)
+      )
+      .finally(() => {
+        console.log("Deleting card...");
+      });
+  }
+
   // Not sure if this is necessary
   getLikes() {
     return fetch(this._baseUrl + "/cards", {

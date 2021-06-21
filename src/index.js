@@ -1,16 +1,16 @@
 // import primary stylesheet
-import "./pages/index.css";
+import './pages/index.css';
 
 // import modules
-import Section from "./scripts/Section.js";
-import Card from "./scripts/Card.js";
-import FormValidator from "./scripts/FormValidator.js";
-import PopupWithForm from "./scripts/PopupWithForm.js";
-import PopupWithImage from "./scripts/PopupWithImage.js";
-import UserInfo from "./scripts/UserInfo.js";
-import Api from "./scripts/Api.js";
-import logoSrc from "./images/logo.svg"; // Logo
-import shaggySrc from "./images/shaggy.jpeg"; // Profile picture
+import Section from './scripts/Section.js';
+import Card from './scripts/Card.js';
+import FormValidator from './scripts/FormValidator.js';
+import PopupWithForm from './scripts/PopupWithForm.js';
+import PopupWithImage from './scripts/PopupWithImage.js';
+import UserInfo from './scripts/UserInfo.js';
+import Api from './scripts/Api.js';
+import logoSrc from './images/logo.svg'; // Logo
+import shaggySrc from './images/shaggy.jpeg'; // Profile picture
 import {
   placesContainerSelector,
   editButton,
@@ -29,7 +29,7 @@ import {
   // initialCards,
   formItems,
   setImageSource,
-} from "./utils/constants.js";
+} from './utils/constants.js';
 
 // set image sources for webpack
 setImageSource(shaggyImg, shaggySrc);
@@ -37,8 +37,8 @@ setImageSource(logoImg, logoSrc);
 
 // connect with API
 const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/group-12",
-  authorization: "d45050bb-6054-461f-a7d7-f299e145a1f0",
+  baseUrl: 'https://around.nomoreparties.co/group-12',
+  authorization: 'd45050bb-6054-461f-a7d7-f299e145a1f0',
 });
 
 // initialize form validation
@@ -52,13 +52,13 @@ avatarValidation.enableValidation();
 deleteValidation.enableValidation();
 
 // initialize user information
-const userInfo = new UserInfo(
-  profileName.textContent,
-  profileTitle.textContent
-);
+
+const userInfo = new UserInfo(profileName.textContent, profileTitle.textContent);
+
+console.log(userInfo);
 
 // get user information
-api.getUserInfo().then((userData) => {
+api.getUserInfo().then(userData => {
   // profileName.textContent = "Loading...";
   // profileTitle.textContent = "";
   userInfo.setUserInfo(userData);
@@ -67,15 +67,20 @@ api.getUserInfo().then((userData) => {
 // initialize and populate places container
 const placeCards = new Section(
   {
-    renderer: (item) => {
+    renderer: item => {
       const newPlace = new Card(
         {
           card: item,
           handleCardClick: (name, link) => {
             imagePreviewPopup.open(name, link);
           },
+          handleDeleteCard: () => {
+            const id = newPlace.getCardId();
+            api.deleteCard(id);
+          },
+          userId: userInfo.getUserId(),
         },
-        "#place-template"
+        '#place-template'
       );
       const cardElement = newPlace.createCard();
       placeCards.setItems(cardElement);
@@ -84,17 +89,17 @@ const placeCards = new Section(
   placesContainerSelector
 );
 
-api.getGroupCards().then((fetchedCards) => {
+api.getGroupCards().then(fetchedCards => {
   placeCards.renderItems(fetchedCards);
 });
 
 // initialize image preview popup
-const imagePreviewPopup = new PopupWithImage(".popup_role_image");
+const imagePreviewPopup = new PopupWithImage('.popup_role_image');
 
 imagePreviewPopup.setEventListeners();
 
 // initialize profile editor popup
-const profileEditor = new PopupWithForm(".popup_role_edit", (data) => {
+const profileEditor = new PopupWithForm('.popup_role_edit', data => {
   userInfo.setUserInfo(data);
   profileEditor.close();
   api.updateProfile(data);
@@ -103,16 +108,17 @@ const profileEditor = new PopupWithForm(".popup_role_edit", (data) => {
 profileEditor.setEventListeners();
 
 // initialize image adder editor popup
-const imageAdderPopup = new PopupWithForm(".popup_role_add", (data) => {
-  api.addCard(data).then((cardData) => {
+const imageAdderPopup = new PopupWithForm('.popup_role_add', data => {
+  api.addCard(data).then(cardData => {
     const newCard = new Card(
       {
         card: cardData,
         handleCardClick: (name, link) => {
           imagePreviewPopup.open(name, link);
         },
+        userId: userInfo.getUserId(),
       },
-      "#place-template"
+      '#place-template'
     );
     const cardElement = newCard.createCard();
     placeCards.setItems(cardElement);
@@ -122,30 +128,33 @@ const imageAdderPopup = new PopupWithForm(".popup_role_add", (data) => {
 
 imageAdderPopup.setEventListeners();
 
-// initialize place deleter form
-const placeDeletePopup = new PopupWithForm(
-  ".popup_role_delete",
-  ({ thing }) => {
-    console.log(thing);
-  }
-);
+// initialize place delete form
+const placeDeletePopup = new PopupWithForm('.popup_role_delete', ({ thing }) => {
+  console.log(thing);
+});
 
 placeDeletePopup.setEventListeners();
 
+// api.getGroupCards().then((res) => {
+//   res.forEach((card) => {
+//     if ((card.owner.name = "Nice")) {
+//       api.deleteCard(card._id);
+//       console.log(`Deleting card: ${card.name}`);
+//     }
+//   });
+// });
+
 // initialize  avatar update popup
-const avatarUpdatePopup = new PopupWithForm(
-  ".popup_role_avatar",
-  ({ link }) => {
-    // Avatar submission handler
-    console.log(link);
-    console.log("hello?");
-  }
-);
+const avatarUpdatePopup = new PopupWithForm('.popup_role_avatar', ({ link }) => {
+  // Avatar submission handler
+  console.log(link);
+  console.log('hello?');
+});
 
 avatarUpdatePopup.setEventListeners();
 
 // add functionality to page buttons
-editButton.addEventListener("click", () => {
+editButton.addEventListener('click', () => {
   const { name, about } = userInfo.getUserInfo();
   popupName.value = name;
   popupTitle.value = about;
@@ -153,10 +162,10 @@ editButton.addEventListener("click", () => {
   profileEditor.open();
 });
 
-addButton.addEventListener("click", () => {
+addButton.addEventListener('click', () => {
   imageAdderPopup.open();
 });
 
-avatarButton.addEventListener("click", () => {
+avatarButton.addEventListener('click', () => {
   avatarUpdatePopup.open();
 });
