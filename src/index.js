@@ -7,6 +7,7 @@ import Card from './scripts/Card.js';
 import FormValidator from './scripts/FormValidator.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
+import PopupDelete from './scripts/PopupDelete.js';
 import UserInfo from './scripts/UserInfo.js';
 import Api from './scripts/Api.js';
 import logoSrc from './images/logo.svg'; // Logo
@@ -59,10 +60,16 @@ console.log(userInfo);
 
 // get user information
 api.getUserInfo().then(userData => {
-  // profileName.textContent = "Loading...";
-  // profileTitle.textContent = "";
   userInfo.setUserInfo(userData);
 });
+
+// initialize place delete form
+const confirmDeletePopup = new PopupDelete('.popup_role_delete', cardId => {
+  api.deleteCard(cardId);
+  confirmDeletePopup.close();
+});
+
+confirmDeletePopup.setEventListeners();
 
 // initialize and populate places container
 const placeCards = new Section(
@@ -74,10 +81,12 @@ const placeCards = new Section(
           handleCardClick: (name, link) => {
             imagePreviewPopup.open(name, link);
           },
-          handleDeleteCard: () => {
-            const id = newPlace.getCardId();
-            api.deleteCard(id);
+          handleDeleteClick: evt => {
+            confirmDeletePopup.open(evt, newPlace._id);
+            // const id = newPlace.getCardId();
+            // api.deleteCard(id);
           },
+          // give newPlace access to user Id, rather than hard coding it into the class
           userId: userInfo.getUserId(),
         },
         '#place-template'
@@ -116,6 +125,11 @@ const imageAdderPopup = new PopupWithForm('.popup_role_add', data => {
         handleCardClick: (name, link) => {
           imagePreviewPopup.open(name, link);
         },
+        handleDeleteClick: () => {
+          const id = newCard.getCardId();
+          api.deleteCard(id);
+        },
+        // userId: userInfo.getUserId(),
         userId: userInfo.getUserId(),
       },
       '#place-template'
@@ -127,13 +141,6 @@ const imageAdderPopup = new PopupWithForm('.popup_role_add', data => {
 });
 
 imageAdderPopup.setEventListeners();
-
-// initialize place delete form
-const placeDeletePopup = new PopupWithForm('.popup_role_delete', ({ thing }) => {
-  console.log(thing);
-});
-
-placeDeletePopup.setEventListeners();
 
 // api.getGroupCards().then((res) => {
 //   res.forEach((card) => {
