@@ -6,11 +6,11 @@ export default class Card {
     this._templateSelector = templateSelector;
   }
 
-  _deletePlace(e) {
-    const deleteImage = new Promise(function (resolve, reject) {});
-    e.target.parentElement.remove();
-    console.log(e.target.parentElement.querySelector(".element__image").src);
-  }
+  // _deletePlace(e) {
+  //   const deleteImage = new Promise(function (resolve, reject) {});
+  //   e.target.parentElement.remove();
+  //   console.log(e.target.parentElement.querySelector(".element__image").src);
+  // }
 
   _toggleLike(e) {
     e.target.classList.toggle("element__heart_liked");

@@ -50,6 +50,10 @@ export default class Api {
       });
   }
 
+  // get app info() {
+  // Promise.all(???)
+  // }
+
   updateProfile({ name, about }) {
     return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
@@ -64,7 +68,7 @@ export default class Api {
     });
   }
 
-  storeUserCard(name, link) {
+  addCard({ name, link }) {
     return fetch(this._baseUrl + "/cards", {
       method: "POST",
       headers: {
@@ -72,10 +76,22 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
-        link: link,
+        name,
+        link,
       }),
-    });
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return Promise.reject(`${res.status} error!`);
+        }
+        return res.json();
+      })
+      .catch((err) =>
+        console.error(`There was a problem fetching cards: ${err}`)
+      )
+      .finally(() => {
+        console.log("Adding card...");
+      });
   }
 
   // Not sure if this is necessary
@@ -128,5 +144,5 @@ export default class Api {
 
 // testApi.storeUserCard(
 //   "Test Card",
-//   "https://mccambley.github.io/web_project_4/images/franklin.jpeg"
+//   "http://www.picsum.photos/1000"
 // );

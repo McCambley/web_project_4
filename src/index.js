@@ -26,7 +26,7 @@ import {
   popupTitle,
   shaggyImg,
   logoImg,
-  initialCards,
+  // initialCards,
   formItems,
   setImageSource,
 } from "./utils/constants.js";
@@ -59,33 +59,33 @@ const userInfo = new UserInfo(
 
 // get user information
 api.getUserInfo().then((userData) => {
-  profileName.textContent = "Loading...";
-  profileTitle.textContent = "";
+  // profileName.textContent = "Loading...";
+  // profileTitle.textContent = "";
   userInfo.setUserInfo(userData);
 });
 
 // initialize and populate places container
-api.getGroupCards().then((fetchedCards) => {
-  const placeCards = new Section(
-    {
-      items: fetchedCards,
-      renderer: (item) => {
-        const newPlace = new Card(
-          {
-            card: item,
-            handleCardClick: (name, link) => {
-              imagePreviewPopup.open(name, link);
-            },
+const placeCards = new Section(
+  {
+    renderer: (item) => {
+      const newPlace = new Card(
+        {
+          card: item,
+          handleCardClick: (name, link) => {
+            imagePreviewPopup.open(name, link);
           },
-          "#place-template"
-        );
-        const cardElement = newPlace.createCard();
-        placeCards.setItems(cardElement);
-      },
+        },
+        "#place-template"
+      );
+      const cardElement = newPlace.createCard();
+      placeCards.setItems(cardElement);
     },
-    placesContainerSelector
-  );
-  placeCards.renderItems();
+  },
+  placesContainerSelector
+);
+
+api.getGroupCards().then((fetchedCards) => {
+  placeCards.renderItems(fetchedCards);
 });
 
 // initialize image preview popup
@@ -103,14 +103,22 @@ const profileEditor = new PopupWithForm(".popup_role_edit", (data) => {
 profileEditor.setEventListeners();
 
 // initialize image adder editor popup
-const imageAdderPopup = new PopupWithForm(
-  ".popup_role_add",
-  ({ name, link }) => {
-    initialCards.unshift({ name, link });
-    placeCards.renderItems();
+const imageAdderPopup = new PopupWithForm(".popup_role_add", (data) => {
+  api.addCard(data).then((cardData) => {
+    const newCard = new Card(
+      {
+        card: cardData,
+        handleCardClick: (name, link) => {
+          imagePreviewPopup.open(name, link);
+        },
+      },
+      "#place-template"
+    );
+    const cardElement = newCard.createCard();
+    placeCards.setItems(cardElement);
     imageAdderPopup.close();
-  }
-);
+  });
+});
 
 imageAdderPopup.setEventListeners();
 
