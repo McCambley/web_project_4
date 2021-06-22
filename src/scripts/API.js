@@ -174,24 +174,25 @@ export default class Api {
 //   .then((res) => res.json())
 //   .then((res) => console.log(res));
 
-const testApi = new Api({
-  baseUrl: 'https://around.nomoreparties.co/group-12',
-  authorization: 'd45050bb-6054-461f-a7d7-f299e145a1f0',
-});
+// const testApi = new Api({
+//   baseUrl: 'https://around.nomoreparties.co/group-12',
+//   authorization: 'd45050bb-6054-461f-a7d7-f299e145a1f0',
+// });
 
-const testApi2 = new Api({
-  baseUrl: 'https://around.nomoreparties.co/v1/group-12',
-  authorization: 'd45050bb-6054-461f-a7d7-f299e145a1f0',
-});
+// const testApi2 = new Api({
+//   baseUrl: 'https://around.nomoreparties.co/v1/group-12',
+//   authorization: 'd45050bb-6054-461f-a7d7-f299e145a1f0',
+// });
 
-testApi.getGroupCards().then(cards => console.log('testAPI', cards));
-testApi2.getGroupCards().then(cards => console.log('testApit2', cards));
-testApi.likeCard('60d06122ff53f802786ea1d0').then(res => {
-  console.log(res);
-});
-testApi2.likeCard('60d111236db34e028389470b').then(res => {
-  console.log(res);
-});
+// testApi.getGroupCards().then(cards => console.log('testAPI', cards));
+// testApi2.getGroupCards().then(cards => console.log('testApit2', cards));
+// testApi.likeCard('60d06122ff53f802786ea1d0').then(res => {
+//   console.log(res);
+// });
+// testApi2.likeCard('60d111236db34e028389470b').then(res => {
+//   console.log(res);
+// });
+
 // testApi.getLikes().then(cardsdata => {
 //   const [...likes] = cardsdata.map(x => [x.likes.length, x.owner.name]);
 //   console.log(likes.reverse());

@@ -17,17 +17,10 @@ export default class Card {
     return this._id;
   }
 
-  // _deletePlace(e) {
-  //   e.target.parentElement.remove();
-  //   // for debugging
-  //   console.log(e.target.parentElement.querySelector('.element__image').src);
-  // }
-
-  _toggleHeart(e) {
-    e.target.classList.toggle('element__heart_liked');
+  _toggleLikeStatus(evt) {
+    evt.target.classList.toggle('element__heart_liked');
+    this._handleLikeCard(evt.target.classList.contains('element__heart_liked'));
   }
-
-  // getThenDisplayLikes
 
   _updateDisplayedLikes(e) {
     const displayedLikesElement = this._newPlace.querySelector('.element__likes');
@@ -47,9 +40,8 @@ export default class Card {
 
     this._likeButton = this._newPlace.querySelector('.element__heart');
     this._likeButton.addEventListener('click', evt => {
-      this._toggleHeart(evt);
+      this._toggleLikeStatus(evt);
       this._updateDisplayedLikes(evt);
-      // update with a patch _handleLikeCard()
     });
 
     this._placeImage = this._newPlace.querySelector('.element__image');
@@ -63,6 +55,14 @@ export default class Card {
     return cardElement;
   }
 
+  _setLikedStatus() {
+    this._newPlace.querySelector('.element__likes').textContent = this._timesLiked;
+    const userHasLiked = this._likedData.some(likes => likes._id === this._user);
+    if (userHasLiked) {
+      this._newPlace.querySelector('.element__heart').classList.add('element__heart_liked');
+    }
+  }
+
   createCard() {
     this._newPlace = this._getTemplate();
     this._setEventListeners();
@@ -70,9 +70,7 @@ export default class Card {
     this._newPlace.querySelector('.element__name').textContent = this._name;
     this._placeImage.src = this._link;
     this._placeImage.alt = `${this._name}`;
-
-    this._newPlace.querySelector('.element__likes').textContent = this._timesLiked;
-    // if ()
+    this._setLikedStatus();
 
     return this._newPlace;
   }

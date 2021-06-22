@@ -42,10 +42,10 @@ const api = new Api({
   authorization: 'd45050bb-6054-461f-a7d7-f299e145a1f0',
 });
 
-const secondaryApi = new Api({
-  baseUrl: 'https://around.nomoreparties.co/group-12',
-  authorization: 'd45050bb-6054-461f-a7d7-f299e145a1f0',
-});
+// const secondaryApi = new Api({
+//   baseUrl: 'https://around.nomoreparties.co/group-12',
+//   authorization: 'd45050bb-6054-461f-a7d7-f299e145a1f0',
+// });
 
 // initialize form validation
 const addPlaceValidation = new FormValidator(formItems, imageAdderForm);
@@ -56,12 +56,10 @@ profileValidation.enableValidation();
 addPlaceValidation.enableValidation();
 avatarValidation.enableValidation();
 deleteValidation.enableValidation();
-
 // initialize user information
 
 const userInfo = new UserInfo(profileName.textContent, profileTitle.textContent);
-
-console.log(userInfo);
+// const userInfo = new UserInfo(data);
 
 // get user information
 api.getUserInfo().then(userData => {
@@ -93,6 +91,9 @@ const placeCards = new Section(
           },
           // give newPlace access to user Id, rather than hard coding it into the class
           userId: userInfo.getUserId(),
+          handleLikeCard: status => {
+            status ? api.likeCard(newPlace._id) : api.removeLike(newPlace._id);
+          },
         },
         '#place-template'
       );
