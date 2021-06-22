@@ -38,6 +38,11 @@ setImageSource(logoImg, logoSrc);
 
 // connect with API
 const api = new Api({
+  baseUrl: 'https://around.nomoreparties.co/v1/group-12',
+  authorization: 'd45050bb-6054-461f-a7d7-f299e145a1f0',
+});
+
+const secondaryApi = new Api({
   baseUrl: 'https://around.nomoreparties.co/group-12',
   authorization: 'd45050bb-6054-461f-a7d7-f299e145a1f0',
 });
@@ -99,7 +104,8 @@ const placeCards = new Section(
 );
 
 api.getGroupCards().then(fetchedCards => {
-  placeCards.renderItems(fetchedCards);
+  // render cards with most recent closer to top
+  placeCards.renderItems(fetchedCards.reverse());
 });
 
 // initialize image preview popup
