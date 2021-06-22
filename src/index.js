@@ -11,7 +11,8 @@ import PopupDelete from './scripts/PopupDelete.js';
 import UserInfo from './scripts/UserInfo.js';
 import Api from './scripts/Api.js';
 import logoSrc from './images/logo.svg'; // Logo
-import shaggySrc from './images/shaggy.jpeg'; // Profile picture
+// import shaggySrc from './images/shaggy.jpeg'; // Profile picture
+import loadingSrc from './images/loading.gif'; // Profile picture
 import {
   placesContainerSelector,
   editButton,
@@ -25,7 +26,7 @@ import {
   profileTitle,
   popupName,
   popupTitle,
-  shaggyImg,
+  avatarElement,
   logoImg,
   // initialCards,
   formItems,
@@ -33,7 +34,7 @@ import {
 } from './utils/constants.js';
 
 // set image sources for webpack
-setImageSource(shaggyImg, shaggySrc);
+setImageSource(avatarElement, loadingSrc);
 setImageSource(logoImg, logoSrc);
 
 // connect with API
@@ -58,13 +59,26 @@ avatarValidation.enableValidation();
 deleteValidation.enableValidation();
 // initialize user information
 
-const userInfo = new UserInfo(profileName.textContent, profileTitle.textContent);
-// const userInfo = new UserInfo(data);
-
+// console.log(1, userInfo);
 // get user information
-api.getUserInfo().then(userData => {
-  userInfo.setUserInfo(userData);
-});
+const userInfo = new UserInfo({});
+console.log('Immediate userInfo: ', userInfo); // returns UserInfo {_name: undefined, _about: undefined, _id: undefined, _avatar: undefined...}
+
+api
+  .getUserInfo()
+  .then(userData => {
+    userInfo.updateUserInfo(userData);
+    return userInfo;
+  })
+  .then(data => {
+    userInfo.setUserInfo(); // Successfully updates the profile
+  });
+
+// api
+//   .getUserInfo()
+//   .then(userData => {
+//     return userInfo = new UserInfo(userData);
+//   })
 
 // initialize place delete form
 const confirmDeletePopup = new PopupDelete('.popup_role_delete', cardId => {
@@ -78,26 +92,23 @@ confirmDeletePopup.setEventListeners();
 const placeCards = new Section(
   {
     renderer: item => {
-      const newPlace = new Card(
+      const newCard = new Card(
         {
           card: item,
           handleCardClick: (name, link) => {
             imagePreviewPopup.open(name, link);
           },
           handleDeleteClick: evt => {
-            confirmDeletePopup.open(evt, newPlace._id);
-            // const id = newPlace.getCardId();
-            // api.deleteCard(id);
+            confirmDeletePopup.open(evt, newCard._id);
           },
-          // give newPlace access to user Id, rather than hard coding it into the class
-          userId: userInfo.getUserId(),
+          userData: userInfo.getUserInfo(),
           handleLikeCard: status => {
-            status ? api.likeCard(newPlace._id) : api.removeLike(newPlace._id);
+            status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
           },
         },
         '#place-template'
       );
-      const cardElement = newPlace.createCard();
+      const cardElement = newCard.createCard();
       placeCards.setItems(cardElement);
     },
   },
@@ -116,7 +127,8 @@ imagePreviewPopup.setEventListeners();
 
 // initialize profile editor popup
 const profileEditor = new PopupWithForm('.popup_role_edit', data => {
-  userInfo.setUserInfo(data);
+  userInfo.updateUserInfo(data);
+  userInfo.setUserInfo();
   profileEditor.close();
   api.updateProfile(data);
 });
@@ -132,12 +144,13 @@ const imageAdderPopup = new PopupWithForm('.popup_role_add', data => {
         handleCardClick: (name, link) => {
           imagePreviewPopup.open(name, link);
         },
-        handleDeleteClick: () => {
-          const id = newCard.getCardId();
-          api.deleteCard(id);
+        handleDeleteClick: evt => {
+          confirmDeletePopup.open(evt, newCard._id);
         },
-        // userId: userInfo.getUserId(),
-        userId: userInfo.getUserId(),
+        userData: userInfo.getUserInfo(),
+        handleLikeCard: status => {
+          status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
+        },
       },
       '#place-template'
     );
@@ -146,6 +159,30 @@ const imageAdderPopup = new PopupWithForm('.popup_role_add', data => {
     imageAdderPopup.close();
   });
 });
+
+// OLD
+// const imageAdderPopup = new PopupWithForm('.popup_role_add', data => {
+//   api.addCard(data).then(cardData => {
+//     const newCard = new Card(
+//       {
+//         card: cardData,
+//         handleCardClick: (name, link) => {
+//           imagePreviewPopup.open(name, link);
+//         },
+//         handleDeleteClick: () => {
+//           const id = newCard.getCardId();
+//           api.deleteCard(id);
+//         },
+//         // userId: userInfo.getUserId(),
+//         userId: userInfo.getUserId(),
+//       },
+//       '#place-template'
+//     );
+//     const cardElement = newCard.createCard();
+//     placeCards.setItems(cardElement);
+//     imageAdderPopup.close();
+//   });
+// });
 
 imageAdderPopup.setEventListeners();
 
@@ -159,10 +196,11 @@ imageAdderPopup.setEventListeners();
 // });
 
 // initialize  avatar update popup
-const avatarUpdatePopup = new PopupWithForm('.popup_role_avatar', ({ link }) => {
-  // Avatar submission handler
-  console.log(link);
-  console.log('hello?');
+const avatarUpdatePopup = new PopupWithForm('.popup_role_avatar', data => {
+  userInfo.updateUserInfo(data);
+  userInfo.setUserInfo();
+  avatarUpdatePopup.close();
+  api.updateAvatar(data);
 });
 
 avatarUpdatePopup.setEventListeners();

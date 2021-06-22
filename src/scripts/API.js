@@ -65,6 +65,25 @@ export default class Api {
       .finally(() => console.log('Updating profile...'));
   }
 
+  updateAvatar({ avatar }) {
+    return fetch(this._baseUrl + '/users/me/avatar', {
+      method: 'PATCH',
+      headers: {
+        authorization: this._auth,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ avatar: avatar }),
+    })
+      .then(res => {
+        if (!res.ok) {
+          return Promise.reject(`${res.status} error!`);
+        }
+        return res.json();
+      })
+      .catch(err => console.error(`There has been a problem updating avatar: ${err}`))
+      .finally(() => console.log('Updating avatar...'));
+  }
+
   addCard({ name, link }) {
     return fetch(this._baseUrl + '/cards', {
       method: 'POST',
