@@ -6,8 +6,10 @@
 
 ## Recent Update
 
-- Code has been refactored to incorporate ES6 classes to create a scalable and flexible build
-- Project has been rebuilt with Webpack to increase cross-browser performance and reduce time to load. Live deployment of the project still runs on Github Pages' native webpack build, but soon that deployment will be updated to match the configuration seen in this repository.
+- Users can now update their profile avatar
+- Users will now recieve a warning before removing a card from the server
+- New loading interface lets users know that the server is working on a response to their requests
+- Users can now interact asychronously with data on a server via an Api. Users can update and store their user information and personal places, view and like other users' places and, delete personal cards from the server.
 
 ---
 
@@ -39,7 +41,11 @@
   - Code has been refactored to incorporate ES6 classes. This refactor will (hopefully) increase readability which will assist with eventual scale increase down the line. Due to the inherant flexibility of ES6 classes, the codebase as a whole is more flexible and the modular structure is well prepared to incorporate more functionality into the page.
 
 - **Webpack**
+
   - Webpack is a bundling tool that can be used to enhance performance and decrease load times. Webpack features utilized in this project reduce HTML and CSS file sizes, compile many JS modules into one output script, and prepare everything to work across all modern browsers. It's great, and now it's used here.
+
+- **Asynchronous Programming with an Api**
+  - At long last this project has been built out to interact with server data.
 
 ## Future Plans
 
