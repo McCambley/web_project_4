@@ -1,3 +1,7 @@
+// ---
+// IMPORT UTILITIES
+// ---
+
 // import primary stylesheet
 import './pages/index.css';
 
@@ -11,54 +15,19 @@ import PopupDelete from './scripts/PopupDelete.js';
 import UserInfo from './scripts/UserInfo.js';
 import Api from './scripts/Api.js';
 import logoSrc from './images/logo.svg'; // Logo
-// import shaggySrc from './images/shaggy.jpeg'; // Profile picture
-import loadingSrc from './images/loading.gif'; // Profile picture
-import {
-  placesContainerSelector,
-  editButton,
-  profileEditorForm,
-  avatarUpdateForm,
-  placeDeleteForm,
-  avatarButton,
-  addButton,
-  imageAdderForm,
-  profileName,
-  profileTitle,
-  popupName,
-  popupTitle,
-  avatarElement,
-  logoImg,
-  element1,
-  element2,
-  element3,
-  element4,
-  element5,
-  element6,
-  // initialCards,
-  formItems,
-  setImageSource,
-} from './utils/constants.js';
+import { placesContainerSelector, editButton, profileEditorForm, avatarUpdateForm, placeDeleteForm, avatarButton, addButton, imageAdderForm, popupName, popupTitle, setImageSource, logoImg, formItems, profileNameElement, profileAboutElement, profileAvatarElement } from './utils/constants.js';
 
-// set image sources for webpack
-// setImageSource(avatarElement, loadingSrc);
 setImageSource(logoImg, logoSrc);
-// setImageSource(element1, loadingSrc);
-// setImageSource(element2, loadingSrc);
-// setImageSource(element3, loadingSrc);
-// setImageSource(element4, loadingSrc);
-// setImageSource(element5, loadingSrc);
-// setImageSource(element6, loadingSrc);
 
-// connect with API
+// ---
+// INITIALIZE CLASS OBJECTS
+// ---
+
+// connect via Api
 const api = new Api({
   baseUrl: 'https://around.nomoreparties.co/v1/group-12',
   authorization: 'd45050bb-6054-461f-a7d7-f299e145a1f0',
 });
-
-// const secondaryApi = new Api({
-//   baseUrl: 'https://around.nomoreparties.co/group-12',
-//   authorization: 'd45050bb-6054-461f-a7d7-f299e145a1f0',
-// });
 
 // initialize form validation
 const addPlaceValidation = new FormValidator(formItems, imageAdderForm);
@@ -69,93 +38,70 @@ profileValidation.enableValidation();
 addPlaceValidation.enableValidation();
 avatarValidation.enableValidation();
 deleteValidation.enableValidation();
-// initialize user information
 
-// console.log(1, userInfo);
-// get user information
-const userInfo = new UserInfo({});
-
-api
-  .getUserInfo()
-  .then(userData => {
-    userInfo.updateUserInfo(userData);
-    return userInfo;
-  })
-  .then(data => {
-    userInfo.setUserInfo(); // Successfully updates the profile
-  });
-
-// api
-//   .getUserInfo()
-//   .then(userData => {
-//     return userInfo = new UserInfo(userData);
-//   })
-
-// initialize place delete form
-const confirmDeletePopup = new PopupDelete('.popup_role_delete', (cardElement, cardId) => {
-  api.deleteCard(cardId).then(() => {
-    cardElement.remove();
-    confirmDeletePopup.close();
-  });
+// initialize userInfo
+const userInfo = new UserInfo({
+  nameElement: profileNameElement,
+  aboutElement: profileAboutElement,
+  avatarElement: profileAvatarElement,
 });
 
-confirmDeletePopup.setEventListeners();
+// initialize place delete form
+const confirmDeletePopup = new PopupDelete({
+  popupSelector: '.popup_role_delete',
+  formSubmitHandler: (cardElement, cardId) => {
+    api.deleteCard(cardId).then(() => {
+      cardElement.remove();
+      confirmDeletePopup.close();
+    });
+  },
+});
 
 // initialize and populate places container
-const placeCards = new Section(
-  {
-    renderer: item => {
-      const newCard = new Card(
-        {
-          card: item,
-          handleCardClick: (name, link) => {
-            imagePreviewPopup.open(name, link);
-          },
-          handleDeleteClick: evt => {
-            confirmDeletePopup.open(evt, newCard._id);
-          },
-          userData: userInfo.getUserInfo(),
-          handleLikeCard: status => {
-            status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
-          },
-        },
-        '#place-template'
-      );
-      const cardElement = newCard.createCard();
-      placeCards.setItems(cardElement);
-    },
+const placeCards = new Section({
+  renderer: item => {
+    const newCard = new Card({
+      card: item,
+      handleCardClick: (name, link) => {
+        imagePreviewPopup.open(name, link);
+      },
+      handleDeleteClick: evt => {
+        confirmDeletePopup.open(evt, newCard._id);
+      },
+      userData: userInfo.getUserInfo(),
+      handleLikeCard: status => {
+        status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
+      },
+      templateSelector: '#place-template',
+    });
+    placeCards.setItems(newCard.createCard());
   },
-  placesContainerSelector
-);
-
-api.getGroupCards().then(fetchedCards => {
-  // render cards with most recent closer to top
-  placeCards.renderItems(fetchedCards.reverse());
+  containerSelector: placesContainerSelector,
 });
 
 // initialize image preview popup
 const imagePreviewPopup = new PopupWithImage('.popup_role_image');
 
-imagePreviewPopup.setEventListeners();
-
 // initialize profile editor popup
-const profileEditor = new PopupWithForm('.popup_role_edit', data => {
-  userInfo.updateUserInfo(data);
-  api.updateProfile(data).then(() => {
-    userInfo.setUserInfo();
-    profileEditor.close();
-  });
+const profileEditor = new PopupWithForm({
+  popupSelector: '.popup_role_edit',
+  formSubmitHandler: data => {
+    userInfo.updateUserInfo(data);
+    api.updateProfile(data).then(() => {
+      userInfo.renderUserInfo();
+      profileEditor.close();
+    });
+  },
 });
 
-profileEditor.setEventListeners();
-
 // initialize image adder editor popup
-const imageAdderPopup = new PopupWithForm('.popup_role_add', data => {
-  api
-    .addCard(data)
-    .then(cardData => {
-      const newCard = new Card(
-        {
+const imageAdderPopup = new PopupWithForm({
+  popupSelector: '.popup_role_add',
+  formSubmitHandler: data => {
+    api
+      .addCard(data)
+      .then(cardData => {
+        const newCard = new Card({
           card: cardData,
           handleCardClick: (name, link) => {
             imagePreviewPopup.open(name, link);
@@ -167,63 +113,39 @@ const imageAdderPopup = new PopupWithForm('.popup_role_add', data => {
           handleLikeCard: status => {
             status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
           },
-        },
-        '#place-template'
-      );
-      const cardElement = newCard.createCard();
-      placeCards.setItems(cardElement);
-    })
-    .then(() => imageAdderPopup.close());
+          templateSelector: '#place-template',
+        });
+        placeCards.setItems(newCard.createCard());
+      })
+      .then(() => imageAdderPopup.close());
+  },
 });
-
-// OLD
-// const imageAdderPopup = new PopupWithForm('.popup_role_add', data => {
-//   api.addCard(data).then(cardData => {
-//     const newCard = new Card(
-//       {
-//         card: cardData,
-//         handleCardClick: (name, link) => {
-//           imagePreviewPopup.open(name, link);
-//         },
-//         handleDeleteClick: () => {
-//           const id = newCard.getCardId();
-//           api.deleteCard(id);
-//         },
-//         // userId: userInfo.getUserId(),
-//         userId: userInfo.getUserId(),
-//       },
-//       '#place-template'
-//     );
-//     const cardElement = newCard.createCard();
-//     placeCards.setItems(cardElement);
-//     imageAdderPopup.close();
-//   });
-// });
-
-imageAdderPopup.setEventListeners();
-
-// api.getGroupCards().then((res) => {
-//   res.forEach((card) => {
-//     if ((card.owner.name = "Nice")) {
-//       api.deleteCard(card._id);
-//       console.log(`Deleting card: ${card.name}`);
-//     }
-//   });
-// });
 
 // initialize  avatar update popup
-const avatarUpdatePopup = new PopupWithForm('.popup_role_avatar', data => {
-  userInfo.updateUserInfo(data);
-
-  api.updateAvatar(data).then(() => {
-    userInfo.setUserInfo();
-    avatarUpdatePopup.close();
-  });
+const avatarUpdatePopup = new PopupWithForm({
+  popupSelector: '.popup_role_avatar',
+  formSubmitHandler: data => {
+    userInfo.updateUserInfo(data);
+    userInfo.removeAvatar();
+    api.updateAvatar(data).then(() => {
+      userInfo.renderUserInfo();
+      avatarUpdatePopup.close();
+    });
+  },
 });
 
+// ---
+// "TURN ON" PAGE - BEGIN LISTENING FOR USER EVENTS
+// ---
+
+// set event listeners on  class objects
+confirmDeletePopup.setEventListeners();
+imagePreviewPopup.setEventListeners();
+profileEditor.setEventListeners();
+imageAdderPopup.setEventListeners();
 avatarUpdatePopup.setEventListeners();
 
-// add functionality to page buttons
+// set event listeners to page buttons
 editButton.addEventListener('click', () => {
   const { name, about } = userInfo.getUserInfo();
   popupName.value = name;
@@ -239,3 +161,24 @@ addButton.addEventListener('click', () => {
 avatarButton.addEventListener('click', () => {
   avatarUpdatePopup.open();
 });
+
+// ---
+// FETCH AND DISPLAY INITIAL CONTENT
+// ---
+
+api
+  // fetch and store user data
+  .getUserInfo()
+  .then(userData => {
+    userInfo.updateUserInfo(userData);
+  })
+  // fetch and render group cards
+  .then(() => {
+    api.getGroupCards().then(fetchedCards => {
+      placeCards.renderItems(fetchedCards.reverse());
+    });
+  })
+  // render stored user info
+  .then(() => {
+    userInfo.renderUserInfo(); // Successfully updates the profile
+  });

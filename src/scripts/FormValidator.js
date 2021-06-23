@@ -11,20 +11,16 @@ export default class FormValidator {
   }
 
   _showInputError(inputElement, errorMessage) {
-    const errorElement = this._form.querySelector(
-      `.popup__input-error_${inputElement.id}`
-    );
+    const errorElement = this._form.querySelector(`.popup__input-error_${inputElement.id}`);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorClass);
   }
 
   _hideInputError(inputElement) {
-    const errorElement = this._form.querySelector(
-      `.popup__input-error_${inputElement.id}`
-    );
+    const errorElement = this._form.querySelector(`.popup__input-error_${inputElement.id}`);
     inputElement.classList.remove(this._inputErrorClass);
-    errorElement.textContent = "";
+    errorElement.textContent = '';
     errorElement.classList.remove(this._errorClass);
   }
 
@@ -39,8 +35,8 @@ export default class FormValidator {
   _setEventListeners() {
     this.toggleButtonState();
 
-    this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener("input", () => {
+    this._inputList.forEach(inputElement => {
+      inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         this.toggleButtonState();
       });
@@ -48,12 +44,11 @@ export default class FormValidator {
   }
 
   _hasInvalidInput(inputList) {
-    return inputList.some((input) => {
+    return inputList.some(input => {
       return !input.validity.valid;
     });
   }
 
-  // This method is public as it's called externally each time a form popup opens
   toggleButtonState() {
     if (this._hasInvalidInput(this._inputList)) {
       this._submitButton.classList.add(this._inactiveButton);
@@ -65,7 +60,7 @@ export default class FormValidator {
   }
 
   enableValidation() {
-    this._form.addEventListener("submit", (e) => {
+    this._form.addEventListener('submit', e => {
       e.preventDefault();
     });
     this._setEventListeners();

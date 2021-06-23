@@ -1,7 +1,7 @@
 import Popup from './Popup.js';
 
 export default class PopupDelete extends Popup {
-  constructor(popupSelector, formSubmitHandler) {
+  constructor({ popupSelector, formSubmitHandler }) {
     super(popupSelector);
     this._form = this._popup.querySelector('.popup__form');
     this._button = this._popup.querySelector('.popup__save-button');
@@ -13,8 +13,6 @@ export default class PopupDelete extends Popup {
     this._button.textContent = 'Yes';
     this._cardId = cardId;
     this._card = evt.target.parentElement;
-    console.log(this._cardId);
-    console.log(this._card);
   }
 
   setEventListeners() {
@@ -23,7 +21,6 @@ export default class PopupDelete extends Popup {
       evt.preventDefault();
       this._button.textContent = 'Deleting...';
       this._formSubmitHandler(this._card, this._cardId);
-      // this._card.remove();
     });
   }
 }

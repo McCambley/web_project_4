@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({ card, handleCardClick, handleDeleteClick, userData, handleLikeCard }, templateSelector) {
+  constructor({ card, handleCardClick, handleDeleteClick, userData, handleLikeCard, templateSelector }) {
     this._name = card.name;
     this._link = card.link;
     this._likedData = card.likes;
@@ -13,10 +13,6 @@ export default class Card {
     this._templateSelector = templateSelector;
     this._handleLikeCard = handleLikeCard;
   }
-
-  // getCardId() {
-  //   return this._id;
-  // }
 
   _toggleLikeStatus(evt) {
     evt.target.classList.toggle('element__heart_liked');
@@ -48,7 +44,6 @@ export default class Card {
     this._placeImage = this._newPlace.querySelector('.element__image');
     this._placeImage.addEventListener('click', () => {
       this._openPopup(this._name, this._link);
-      console.log('Card created by: ', this._creatorName);
     });
   }
 
