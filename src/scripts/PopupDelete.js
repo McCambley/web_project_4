@@ -10,7 +10,7 @@ export default class PopupDelete extends Popup {
 
   open(evt, cardId) {
     super.open();
-    this._button.textContent = 'Save';
+    this._button.textContent = 'Yes';
     this._cardId = cardId;
     this._card = evt.target.parentElement;
     console.log(this._cardId);
@@ -21,7 +21,7 @@ export default class PopupDelete extends Popup {
     super.setEventListeners();
     this._form.addEventListener('submit', evt => {
       evt.preventDefault();
-      this._button.textContent = 'Saving...';
+      this._button.textContent = 'Deleting...';
       this._formSubmitHandler(this._card, this._cardId);
       // this._card.remove();
     });
