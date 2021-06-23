@@ -40,14 +40,14 @@ import {
 } from './utils/constants.js';
 
 // set image sources for webpack
-setImageSource(avatarElement, loadingSrc);
+// setImageSource(avatarElement, loadingSrc);
 setImageSource(logoImg, logoSrc);
-setImageSource(element1, loadingSrc);
-setImageSource(element2, loadingSrc);
-setImageSource(element3, loadingSrc);
-setImageSource(element4, loadingSrc);
-setImageSource(element5, loadingSrc);
-setImageSource(element6, loadingSrc);
+// setImageSource(element1, loadingSrc);
+// setImageSource(element2, loadingSrc);
+// setImageSource(element3, loadingSrc);
+// setImageSource(element4, loadingSrc);
+// setImageSource(element5, loadingSrc);
+// setImageSource(element6, loadingSrc);
 
 // connect with API
 const api = new Api({
@@ -74,7 +74,6 @@ deleteValidation.enableValidation();
 // console.log(1, userInfo);
 // get user information
 const userInfo = new UserInfo({});
-console.log('Immediate userInfo: ', userInfo); // returns UserInfo {_name: undefined, _about: undefined, _id: undefined, _avatar: undefined...}
 
 api
   .getUserInfo()
@@ -93,9 +92,11 @@ api
 //   })
 
 // initialize place delete form
-const confirmDeletePopup = new PopupDelete('.popup_role_delete', cardId => {
-  api.deleteCard(cardId);
-  confirmDeletePopup.close();
+const confirmDeletePopup = new PopupDelete('.popup_role_delete', (cardElement, cardId) => {
+  api.deleteCard(cardId).then(() => {
+    cardElement.remove();
+    confirmDeletePopup.close();
+  });
 });
 
 confirmDeletePopup.setEventListeners();
@@ -140,9 +141,10 @@ imagePreviewPopup.setEventListeners();
 // initialize profile editor popup
 const profileEditor = new PopupWithForm('.popup_role_edit', data => {
   userInfo.updateUserInfo(data);
-  userInfo.setUserInfo();
-  profileEditor.close();
-  api.updateProfile(data);
+  api.updateProfile(data).then(() => {
+    userInfo.setUserInfo();
+    profileEditor.close();
+  });
 });
 
 profileEditor.setEventListeners();
@@ -212,8 +214,11 @@ imageAdderPopup.setEventListeners();
 // initialize  avatar update popup
 const avatarUpdatePopup = new PopupWithForm('.popup_role_avatar', data => {
   userInfo.updateUserInfo(data);
-  userInfo.setUserInfo();
-  api.updateAvatar(data).then(() => avatarUpdatePopup.close());
+
+  api.updateAvatar(data).then(() => {
+    userInfo.setUserInfo();
+    avatarUpdatePopup.close();
+  });
 });
 
 avatarUpdatePopup.setEventListeners();

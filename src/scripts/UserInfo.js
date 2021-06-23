@@ -32,10 +32,16 @@ export default class UserInfo {
   }
 
   setUserInfo() {
+    // remove loading page load effects
+    this._profileName.classList.remove('shimmer');
+    this._profileTitle.classList.remove('shimmer');
+    document.querySelector('.profile__edit-button').classList.remove('hide');
+    document.querySelector('.profile__add-button').classList.remove('hide');
+
+    // populate profile with userInfo
     this._profileName.textContent = this._name;
     this._profileTitle.textContent = this._about;
-    // this._profileImage.src = this._avatar;
-    // this._profileImage.src = 'http://www.picsum.photos/800';
     this._profileImage.src = this._avatar;
+    this._profileImage.alt = this._name;
   }
 }
