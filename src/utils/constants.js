@@ -24,6 +24,12 @@ export const popupTitle = document.querySelector('.popup__input_role_title');
 
 export const avatarElement = document.getElementById('avatar');
 export const logoImg = document.getElementById('logo');
+export const element1 = document.getElementById('element1');
+export const element2 = document.getElementById('element2');
+export const element3 = document.getElementById('element3');
+export const element4 = document.getElementById('element4');
+export const element5 = document.getElementById('element5');
+export const element6 = document.getElementById('element6');
 
 export const initialCards = [
   {

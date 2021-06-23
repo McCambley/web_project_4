@@ -2,25 +2,25 @@
   height: 50px;
   width: 150px;
   margin-left: 24px;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #ffffff;
   background-color: transparent;
   border-radius: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: all .2s ease;
+  transition: opacity 0.2s ease;
   box-sizing: border-box;
 
   /* + icon */
   background-image: url(../../../images/add-image.svg);
-  background-size:auto;
+  background-size: auto;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .profile__add-button:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 @media (max-width: 768px) {
@@ -35,4 +35,3 @@
     width: 100%;
   }
 }
-

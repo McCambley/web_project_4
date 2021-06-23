@@ -28,6 +28,12 @@ import {
   popupTitle,
   avatarElement,
   logoImg,
+  element1,
+  element2,
+  element3,
+  element4,
+  element5,
+  element6,
   // initialCards,
   formItems,
   setImageSource,
@@ -36,6 +42,12 @@ import {
 // set image sources for webpack
 setImageSource(avatarElement, loadingSrc);
 setImageSource(logoImg, logoSrc);
+setImageSource(element1, loadingSrc);
+setImageSource(element2, loadingSrc);
+setImageSource(element3, loadingSrc);
+setImageSource(element4, loadingSrc);
+setImageSource(element5, loadingSrc);
+setImageSource(element6, loadingSrc);
 
 // connect with API
 const api = new Api({
@@ -137,27 +149,29 @@ profileEditor.setEventListeners();
 
 // initialize image adder editor popup
 const imageAdderPopup = new PopupWithForm('.popup_role_add', data => {
-  api.addCard(data).then(cardData => {
-    const newCard = new Card(
-      {
-        card: cardData,
-        handleCardClick: (name, link) => {
-          imagePreviewPopup.open(name, link);
+  api
+    .addCard(data)
+    .then(cardData => {
+      const newCard = new Card(
+        {
+          card: cardData,
+          handleCardClick: (name, link) => {
+            imagePreviewPopup.open(name, link);
+          },
+          handleDeleteClick: evt => {
+            confirmDeletePopup.open(evt, newCard._id);
+          },
+          userData: userInfo.getUserInfo(),
+          handleLikeCard: status => {
+            status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
+          },
         },
-        handleDeleteClick: evt => {
-          confirmDeletePopup.open(evt, newCard._id);
-        },
-        userData: userInfo.getUserInfo(),
-        handleLikeCard: status => {
-          status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
-        },
-      },
-      '#place-template'
-    );
-    const cardElement = newCard.createCard();
-    placeCards.setItems(cardElement);
-    imageAdderPopup.close();
-  });
+        '#place-template'
+      );
+      const cardElement = newCard.createCard();
+      placeCards.setItems(cardElement);
+    })
+    .then(() => imageAdderPopup.close());
 });
 
 // OLD
@@ -199,8 +213,7 @@ imageAdderPopup.setEventListeners();
 const avatarUpdatePopup = new PopupWithForm('.popup_role_avatar', data => {
   userInfo.updateUserInfo(data);
   userInfo.setUserInfo();
-  avatarUpdatePopup.close();
-  api.updateAvatar(data);
+  api.updateAvatar(data).then(() => avatarUpdatePopup.close());
 });
 
 avatarUpdatePopup.setEventListeners();
