@@ -17,18 +17,16 @@ export default class Card {
   _toggleLikeStatus(evt) {
     // card has not been liked yet
     this._handleLikeCard(!evt.target.classList.contains('element__heart_liked'))
-      .then(() => {
+      .then(card => {
         evt.target.classList.toggle('element__heart_liked');
-        this._updateDisplayedLikes(evt);
+        this._updateDisplayedLikes(evt, card);
       })
       .catch(err => console.error(err));
   }
 
-  _updateDisplayedLikes(e) {
-    // e.target.classList.toggle('element__heart_liked');
+  _updateDisplayedLikes(e, card) {
     const displayedLikesElement = this._newPlace.querySelector('.element__likes');
-    let displayedLikes = parseInt(displayedLikesElement.textContent);
-    displayedLikesElement.textContent = e.target.classList.contains('element__heart_liked') ? ++displayedLikes : --displayedLikes;
+    displayedLikesElement.textContent = card.likes.length;
   }
 
   _setEventListeners() {
