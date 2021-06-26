@@ -7,9 +7,9 @@
 ## Recent Update
 
 - Users can now update their profile avatar
-- Users will now recieve a warning before removing a card from the server
+- Users will now receive a warning before removing a card from the server
 - New loading interface lets users know that the server is working on a response to their requests
-- Users can now interact asychronously with data on a server via an Api. Users can update and store their user information and personal places, view and like other users' places and, delete personal cards from the server.
+- Users can now interact asynchronously with data on a server via an Api. Users can update and store their user information and personal places, view and like other users' places and, delete personal cards from the server.
 
 ---
 
@@ -38,7 +38,7 @@
 
 - **ES6 Class Structure**
 
-  - Code has been refactored to incorporate ES6 classes. This refactor will (hopefully) increase readability which will assist with eventual scale increase down the line. Due to the inherant flexibility of ES6 classes, the codebase as a whole is more flexible and the modular structure is well prepared to incorporate more functionality into the page.
+  - Code has been refactored to incorporate ES6 classes. This refactor will (hopefully) increase readability which will assist with eventual scale increase down the line. Due to the inherent flexibility of ES6 classes, the codebase as a whole is more flexible and the modular structure is well prepared to incorporate more functionality into the page.
 
 - **Webpack**
 
