@@ -15,7 +15,7 @@ import PopupDelete from './scripts/PopupDelete.js';
 import UserInfo from './scripts/UserInfo.js';
 import Api from './scripts/Api.js';
 import logoSrc from './images/logo.svg'; // Logo
-import { placesContainerSelector, editButton, profileEditorForm, avatarUpdateForm, placeDeleteForm, avatarButton, addButton, imageAdderForm, popupName, popupTitle, setImageSource, logoImg, formItems, profileNameElement, profileAboutElement, profileAvatarElement } from './utils/constants.js';
+import { placesContainerSelector, editButton, profileEditorForm, avatarUpdateForm, avatarButton, addButton, imageAdderForm, popupName, popupTitle, setImageSource, logoImg, formItems, profileNameElement, profileAboutElement, profileAvatarElement } from './utils/constants.js';
 
 setImageSource(logoImg, logoSrc);
 
@@ -58,23 +58,27 @@ const confirmDeletePopup = new PopupDelete({
   },
 });
 
+const createNewCard = function (item) {
+  return new Card({
+    card: item,
+    handleCardClick: (name, link) => {
+      imagePreviewPopup.open(name, link);
+    },
+    handleDeleteClick: evt => {
+      confirmDeletePopup.open(evt, item._id);
+    },
+    userData: userInfo.getUserInfo(),
+    handleLikeCard: status => {
+      return status ? api.likeCard(item._id) : api.removeLike(item._id);
+    },
+    templateSelector: '#place-template',
+  });
+};
+
 // initialize and populate places container
 const placeCards = new Section({
   renderer: item => {
-    const newCard = new Card({
-      card: item,
-      handleCardClick: (name, link) => {
-        imagePreviewPopup.open(name, link);
-      },
-      handleDeleteClick: evt => {
-        confirmDeletePopup.open(evt, newCard._id);
-      },
-      userData: userInfo.getUserInfo(),
-      handleLikeCard: status => {
-        return status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
-      },
-      templateSelector: '#place-template',
-    });
+    const newCard = createNewCard(item);
     placeCards.setItems(newCard.createCard());
   },
   containerSelector: placesContainerSelector,
@@ -105,20 +109,7 @@ const imageAdderPopup = new PopupWithForm({
     api
       .addCard(data)
       .then(cardData => {
-        const newCard = new Card({
-          card: cardData,
-          handleCardClick: (name, link) => {
-            imagePreviewPopup.open(name, link);
-          },
-          handleDeleteClick: evt => {
-            confirmDeletePopup.open(evt, newCard._id);
-          },
-          userData: userInfo.getUserInfo(),
-          handleLikeCard: status => {
-            return status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
-          },
-          templateSelector: '#place-template',
-        });
+        const newCard = createNewCard(cardData);
         placeCards.setItems(newCard.createCard());
       })
       .then(() => imageAdderPopup.close())
@@ -164,12 +155,12 @@ editButton.addEventListener('click', () => {
 
 addButton.addEventListener('click', () => {
   imageAdderPopup.open();
-  imageAdderPopup.toggleButtonState();
+  addPlaceValidation.toggleButtonState();
 });
 
 avatarButton.addEventListener('click', () => {
   avatarUpdatePopup.open();
-  avatarUpdatePopup.toggleButtonState();
+  avatarValidation.toggleButtonState();
 });
 
 // ---
