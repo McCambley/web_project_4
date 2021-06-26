@@ -99,5 +99,3 @@ export default class Api {
     }).then(res => this._checkResponse(res));
   }
 }
-
-//      .catch(err => console.error(`There has been a problem fetching user info: ${err}`));

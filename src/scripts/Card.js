@@ -15,11 +15,17 @@ export default class Card {
   }
 
   _toggleLikeStatus(evt) {
-    evt.target.classList.toggle('element__heart_liked');
-    this._handleLikeCard(evt.target.classList.contains('element__heart_liked'));
+    // card has not been liked yet
+    this._handleLikeCard(!evt.target.classList.contains('element__heart_liked'))
+      .then(() => {
+        evt.target.classList.toggle('element__heart_liked');
+        this._updateDisplayedLikes(evt);
+      })
+      .catch(err => console.error(err));
   }
 
   _updateDisplayedLikes(e) {
+    // e.target.classList.toggle('element__heart_liked');
     const displayedLikesElement = this._newPlace.querySelector('.element__likes');
     let displayedLikes = parseInt(displayedLikesElement.textContent);
     displayedLikesElement.textContent = e.target.classList.contains('element__heart_liked') ? ++displayedLikes : --displayedLikes;
@@ -38,7 +44,6 @@ export default class Card {
     this._likeButton = this._newPlace.querySelector('.element__heart');
     this._likeButton.addEventListener('click', evt => {
       this._toggleLikeStatus(evt);
-      this._updateDisplayedLikes(evt);
     });
 
     this._placeImage = this._newPlace.querySelector('.element__image');

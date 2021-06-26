@@ -73,7 +73,7 @@ const placeCards = new Section({
       },
       userData: userInfo.getUserInfo(),
       handleLikeCard: status => {
-        status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
+        return status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
       },
       templateSelector: '#place-template',
     });
@@ -117,7 +117,7 @@ const imageAdderPopup = new PopupWithForm({
           },
           userData: userInfo.getUserInfo(),
           handleLikeCard: status => {
-            status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
+            return status ? api.likeCard(newCard._id) : api.removeLike(newCard._id);
           },
           templateSelector: '#place-template',
         });
