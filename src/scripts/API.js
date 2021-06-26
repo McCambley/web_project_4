@@ -5,19 +5,21 @@ export default class Api {
     this._auth = authorization;
   }
 
+  _checkResponse(res) {
+    {
+      if (!res.ok) {
+        return Promise.reject(`${res.status} error!`);
+      }
+      return res.json();
+    }
+  }
+
   getUserInfo() {
     return fetch(this._baseUrl + '/users/me', {
       headers: {
         authorization: this._auth,
       },
-    })
-      .then(res => {
-        if (!res.ok) {
-          return Promise.reject(`${res.status} error!`);
-        }
-        return res.json();
-      })
-      .catch(err => console.error(`There has been a problem fetching user info: ${err}`));
+    }).then(res => this._checkResponse(res));
   }
 
   getGroupCards() {
@@ -26,12 +28,7 @@ export default class Api {
         authorization: this._auth,
       },
     })
-      .then(res => {
-        if (!res.ok) {
-          return Promise.reject(`${res.status} error!`);
-        }
-        return res.json();
-      })
+      .then(res => this._checkResponse(res))
       .catch(err => console.error(`There was a problem fetching cards: ${err}`));
   }
 
@@ -47,12 +44,7 @@ export default class Api {
         about: about,
       }),
     })
-      .then(res => {
-        if (!res.ok) {
-          return Promise.reject(`${res.status} error!`);
-        }
-        return res.json();
-      })
+      .then(res => this._checkResponse(res))
       .catch(err => console.error(`There has been a problem updating profile: ${err}`));
   }
 
@@ -65,12 +57,7 @@ export default class Api {
       },
       body: JSON.stringify({ avatar: avatar }),
     })
-      .then(res => {
-        if (!res.ok) {
-          return Promise.reject(`${res.status} error!`);
-        }
-        return res.json();
-      })
+      .then(res => this._checkResponse(res))
       .catch(err => console.error(`There has been a problem updating avatar: ${err}`));
   }
 
@@ -86,12 +73,7 @@ export default class Api {
         link,
       }),
     })
-      .then(res => {
-        if (!res.ok) {
-          return Promise.reject(`${res.status} error!`);
-        }
-        return res.json();
-      })
+      .then(res => this._checkResponse(res))
       .catch(err => console.error(`There was a problem adding card: ${err}`));
   }
 
@@ -103,12 +85,7 @@ export default class Api {
         'Content-Type': 'application/json',
       },
     })
-      .then(res => {
-        if (!res.ok) {
-          return Promise.reject(`${res.status} error!`);
-        }
-        return res.json();
-      })
+      .then(res => this._checkResponse(res))
       .catch(err => console.error(`There has been a problem liking this card: ${err}`));
   }
 
@@ -120,12 +97,7 @@ export default class Api {
         'Content-Type': 'application/json',
       },
     })
-      .then(res => {
-        if (!res.ok) {
-          return Promise.reject(`${res.status} error!`);
-        }
-        return res.json();
-      })
+      .then(res => this._checkResponse(res))
       .catch(err => console.error(`There has been a problem removing the like from this card: ${err}`));
   }
 
@@ -137,12 +109,9 @@ export default class Api {
         'Content-Type': 'application/json',
       },
     })
-      .then(res => {
-        if (!res.ok) {
-          return Promise.reject(`${res.status} error!`);
-        }
-        return res.json();
-      })
+      .then(res => this._checkResponse(res))
       .catch(err => console.error(`There was a problem deleting card: ${err}`));
   }
 }
+
+//      .catch(err => console.error(`There has been a problem fetching user info: ${err}`));

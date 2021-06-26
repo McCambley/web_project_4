@@ -182,3 +182,8 @@ api
   .then(() => {
     userInfo.renderUserInfo(); // Successfully updates the profile
   });
+
+//testing
+api.getUserInfo().then(res => {
+  console.log(res);
+});
