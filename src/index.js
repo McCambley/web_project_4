@@ -33,11 +33,9 @@ const api = new Api({
 const addPlaceValidation = new FormValidator(formItems, imageAdderForm);
 const profileValidation = new FormValidator(formItems, profileEditorForm);
 const avatarValidation = new FormValidator(formItems, avatarUpdateForm);
-const deleteValidation = new FormValidator(formItems, placeDeleteForm);
 profileValidation.enableValidation();
 addPlaceValidation.enableValidation();
 avatarValidation.enableValidation();
-deleteValidation.enableValidation();
 
 // initialize userInfo
 const userInfo = new UserInfo({
@@ -166,10 +164,12 @@ editButton.addEventListener('click', () => {
 
 addButton.addEventListener('click', () => {
   imageAdderPopup.open();
+  imageAdderPopup.toggleButtonState();
 });
 
 avatarButton.addEventListener('click', () => {
   avatarUpdatePopup.open();
+  avatarUpdatePopup.toggleButtonState();
 });
 
 // ---
