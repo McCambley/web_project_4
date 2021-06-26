@@ -191,6 +191,7 @@ api
   // render stored user info
   .then(() => {
     userInfo.renderUserInfo(); // Successfully updates the profile
+    userInfo.removeLoadingStyles(); // Removes shimmer effect
   })
   .catch(err => console.error(`Problem rendering content: ${err}`));
 

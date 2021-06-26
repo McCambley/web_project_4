@@ -31,13 +31,15 @@ export default class UserInfo {
     };
   }
 
-  renderUserInfo() {
+  removeLoadingStyles() {
     // remove loading page load effects
     this._profileName.classList.remove('shimmer');
     this._profileAbout.classList.remove('shimmer');
     document.querySelector('.profile__edit-button').classList.remove('hide');
     document.querySelector('.profile__add-button').classList.remove('hide');
+  }
 
+  renderUserInfo() {
     // populate profile with userInfo
     this._profileName.textContent = this._name;
     this._profileAbout.textContent = this._about;
