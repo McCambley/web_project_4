@@ -27,9 +27,7 @@ export default class Api {
       headers: {
         authorization: this._auth,
       },
-    })
-      .then(res => this._checkResponse(res))
-      .catch(err => console.error(`There was a problem fetching cards: ${err}`));
+    }).then(res => this._checkResponse(res));
   }
 
   updateProfile({ name, about }) {
@@ -43,9 +41,7 @@ export default class Api {
         name: name,
         about: about,
       }),
-    })
-      .then(res => this._checkResponse(res))
-      .catch(err => console.error(`There has been a problem updating profile: ${err}`));
+    }).then(res => this._checkResponse(res));
   }
 
   updateAvatar({ avatar }) {
@@ -56,9 +52,7 @@ export default class Api {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ avatar: avatar }),
-    })
-      .then(res => this._checkResponse(res))
-      .catch(err => console.error(`There has been a problem updating avatar: ${err}`));
+    }).then(res => this._checkResponse(res));
   }
 
   addCard({ name, link }) {
@@ -72,9 +66,7 @@ export default class Api {
         name,
         link,
       }),
-    })
-      .then(res => this._checkResponse(res))
-      .catch(err => console.error(`There was a problem adding card: ${err}`));
+    }).then(res => this._checkResponse(res));
   }
 
   likeCard(cardId) {
@@ -84,9 +76,7 @@ export default class Api {
         authorization: this._auth,
         'Content-Type': 'application/json',
       },
-    })
-      .then(res => this._checkResponse(res))
-      .catch(err => console.error(`There has been a problem liking this card: ${err}`));
+    }).then(res => this._checkResponse(res));
   }
 
   removeLike(cardId) {
@@ -96,9 +86,7 @@ export default class Api {
         authorization: this._auth,
         'Content-Type': 'application/json',
       },
-    })
-      .then(res => this._checkResponse(res))
-      .catch(err => console.error(`There has been a problem removing the like from this card: ${err}`));
+    }).then(res => this._checkResponse(res));
   }
 
   deleteCard(cardId) {
@@ -108,9 +96,7 @@ export default class Api {
         authorization: this._auth,
         'Content-Type': 'application/json',
       },
-    })
-      .then(res => this._checkResponse(res))
-      .catch(err => console.error(`There was a problem deleting card: ${err}`));
+    }).then(res => this._checkResponse(res));
   }
 }
 

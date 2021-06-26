@@ -50,10 +50,13 @@ const userInfo = new UserInfo({
 const confirmDeletePopup = new PopupDelete({
   popupSelector: '.popup_role_delete',
   formSubmitHandler: (cardElement, cardId) => {
-    api.deleteCard(cardId).then(() => {
-      cardElement.remove();
-      confirmDeletePopup.close();
-    });
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        cardElement.remove();
+        confirmDeletePopup.close();
+      })
+      .catch(err => console.error(`Problem deleting card: ${err}`));
   },
 });
 
@@ -87,10 +90,13 @@ const profileEditor = new PopupWithForm({
   popupSelector: '.popup_role_edit',
   formSubmitHandler: data => {
     userInfo.updateUserInfo(data);
-    api.updateProfile(data).then(() => {
-      userInfo.renderUserInfo();
-      profileEditor.close();
-    });
+    api
+      .updateProfile(data)
+      .then(() => {
+        userInfo.renderUserInfo();
+        profileEditor.close();
+      })
+      .catch(err => console.error(`Problem updating profile: ${err}`));
   },
 });
 
@@ -117,7 +123,8 @@ const imageAdderPopup = new PopupWithForm({
         });
         placeCards.setItems(newCard.createCard());
       })
-      .then(() => imageAdderPopup.close());
+      .then(() => imageAdderPopup.close())
+      .catch(err => console.error(`Problem adding card: ${err}`));
   },
 });
 
@@ -127,10 +134,13 @@ const avatarUpdatePopup = new PopupWithForm({
   formSubmitHandler: data => {
     userInfo.updateUserInfo(data);
     userInfo.removeAvatar();
-    api.updateAvatar(data).then(() => {
-      userInfo.renderUserInfo();
-      avatarUpdatePopup.close();
-    });
+    api
+      .updateAvatar(data)
+      .then(() => {
+        userInfo.renderUserInfo();
+        avatarUpdatePopup.close();
+      })
+      .catch(err => console.error(`Problem updating avatar: ${err}`));
   },
 });
 
@@ -181,7 +191,8 @@ api
   // render stored user info
   .then(() => {
     userInfo.renderUserInfo(); // Successfully updates the profile
-  });
+  })
+  .catch(err => console.error(`Problem rendering content: ${err}`));
 
 //testing
 api.getUserInfo().then(res => {
