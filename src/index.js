@@ -87,10 +87,10 @@ const imagePreviewPopup = new PopupWithImage('.popup_role_image');
 const profileEditor = new PopupWithForm({
   popupSelector: '.popup_role_edit',
   formSubmitHandler: data => {
-    userInfo.updateUserInfo(data);
     api
       .updateProfile(data)
       .then(() => {
+        userInfo.updateUserInfo(data);
         userInfo.renderUserInfo();
         profileEditor.close();
       })
@@ -130,11 +130,11 @@ const imageAdderPopup = new PopupWithForm({
 const avatarUpdatePopup = new PopupWithForm({
   popupSelector: '.popup_role_avatar',
   formSubmitHandler: data => {
-    userInfo.updateUserInfo(data);
-    userInfo.removeAvatar();
+    userInfo.removeAvatar(); // displays loading effect while server responds
     api
       .updateAvatar(data)
       .then(() => {
+        userInfo.updateUserInfo(data);
         userInfo.renderUserInfo();
         avatarUpdatePopup.close();
       })
@@ -194,8 +194,3 @@ api
     userInfo.removeLoadingStyles(); // Removes shimmer effect
   })
   .catch(err => console.error(`Problem rendering content: ${err}`));
-
-//testing
-api.getUserInfo().then(res => {
-  console.log(res);
-});
