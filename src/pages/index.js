@@ -3,19 +3,19 @@
 // ---
 
 // import primary stylesheet
-import './pages/index.css';
+import './index.css';
 
 // import modules
-import Section from './scripts/Section.js';
-import Card from './scripts/Card.js';
-import FormValidator from './scripts/FormValidator.js';
-import PopupWithForm from './scripts/PopupWithForm.js';
-import PopupWithImage from './scripts/PopupWithImage.js';
-import PopupDelete from './scripts/PopupDelete.js';
-import UserInfo from './scripts/UserInfo.js';
-import Api from './scripts/Api.js';
-import logoSrc from './images/logo.svg'; // Logo
-import { placesContainerSelector, editButton, profileEditorForm, avatarUpdateForm, avatarButton, addButton, imageAdderForm, popupName, popupTitle, setImageSource, logoImg, formItems, profileNameElement, profileAboutElement, profileAvatarElement } from './utils/constants.js';
+import Section from '../components/Section.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupDelete from '../components/PopupDelete.js';
+import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
+import logoSrc from '../images/logo.svg'; // Logo
+import { placesContainerSelector, editButton, profileEditorForm, avatarUpdateForm, avatarButton, addButton, imageAdderForm, popupName, popupTitle, setImageSource, logoImg, formItems, profileNameElement, profileAboutElement, profileAvatarElement } from '../utils/constants.js';
 
 setImageSource(logoImg, logoSrc);
 
@@ -166,6 +166,12 @@ avatarButton.addEventListener('click', () => {
 // ---
 // FETCH AND DISPLAY INITIAL CONTENT
 // ---
+const removeLoadingStyles = function () {
+  profileNameElement.classList.remove('shimmer');
+  profileAboutElement.classList.remove('shimmer');
+  editButton.classList.remove('hide');
+  addButton.classList.remove('hide');
+};
 
 api
   // fetch and store user data
@@ -182,6 +188,6 @@ api
   // render stored user info
   .then(() => {
     userInfo.renderUserInfo(); // Successfully updates the profile
-    userInfo.removeLoadingStyles(); // Removes shimmer effect
+    removeLoadingStyles(); // Removes shimmer effect
   })
   .catch(err => console.error(`Problem rendering content: ${err}`));
